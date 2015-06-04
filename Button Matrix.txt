@@ -1,0 +1,74 @@
+Microwave Button Matrix:
+
+Pins from top to bottom:
+Input:
+	p0 = dark blue
+	p1 = blue
+	p2 = sky blue
+	p3 = light blue
+Output:
+	p4 = red
+	p5 = yellow
+	p6 = green
+	p7 = pink
+	p8 = purple
+	p9 = black
+
+
+BUTTONS:		PINS:		COLORS:
+• Time Cook:		p0 & p4		(dark blue 	& red)
+• Time Defrost:		p0 & p5		(dark blue 	& yellow)
+• Weight Defrost:	p0 & p6		(dark blue 	& green)
+• Power:		p0 & p7		(dark blue 	& pink)
+• Clock:		p0 & p8		(dark blue 	& purple)
+• Kitchen Timer:	p0 & p9		(dark blue	& black)
+• Popcorn:		p1 & p4		(blue 		& red)
+• Potato:		p1 & p5		(blue 		& yellow)
+• Pizza:		p1 & p6		(blue 		& green)
+• Frozen Vegetable:	p1 & p7		(blue 		& pink)
+• Beverage:		p1 & p8		(blue 		& purple)
+• Dinner Plate:		p1 & p9		(blue 		& black)
+• 0:			p2 & p4		(sky blue 	& red)
+• 1:			p2 & p5		(sky blue 	& yellow)
+• 2:			p2 & p6		(sky blue 	& green)
+• 3:			p2 & p7		(sky blue 	& pink)
+• 4:			p2 & p8		(sky blue 	& purple)
+• 5:			p2 & p9		(sky blue 	& black)
+• 6:			p3 & p4		(light blue 	& red)
+• 7:			p3 & p5		(light blue 	& yellow)
+• 8:			p3 & p6		(light blue 	& green)
+• 9:			p3 & p7		(light blue 	& pink)
+• Stop/Cancel:		p3 & p8		(light blue 	& purple)
+• Start/+30 sec:	p3 & p9		(light blue 	& black)
+
+
+INPUT:	OUTPUT:	BUTTON:
+p0	p4	Time Cook
+	p5	Time Defrost
+	p6	Weight Defrost
+	p7	Power
+	p8	Clock
+ 	p9	Kitchen Timer
+
+p1	p4	Popcorn
+	p5	Potato
+	p6	Pizza
+	p7	Frozen Vegetable
+	p8	Beverage
+	p9	Dinner Plate
+
+p2	p4	0
+	p5	1
+	p6	2
+	p7	3
+	p8	4
+	p9	5
+
+p3	p4	6
+	p5	7
+	p6	8
+	p7	9
+	p8	Stop/Cancel
+	p9	Start/+30 sec.
+
+
