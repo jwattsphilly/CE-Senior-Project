@@ -1,0 +1,25 @@
+Stuart Johnsen, Darin Stoker, James Watts
+Computer Engineering Senior Project, Fall 2015
+Heat Map Technology for a Microwave Oven
+ 
+March 29th – April 4th: Parts research, potential sources found for each of our required parts and detailed in our updated project proposal report.
+ 
+April 5th – April 11th: Purchased microwave to begin testing with from Walmart for $60.
+ 
+April 12th – April 18th: Began microwave teardown, started reverse engineering the connection points, soldered in test leads for logic analysis.  Found that the microcontroller is a microwave specific one.  If we are able to figure out the logic, control of the microwave should be easily recreateable.
+ 
+April 19th – April 25th: Attempted to get information on another potential camera sensor from FLIR, quote was out of scope for the project.  Ordered parts for initial prototyping, still need to obtain a camera from Seek, which is taking longer than expected for an evaluation unit.
+ 
+April 26th – May 2nd: All parts are not currently in hand.  We were busy finishing other projects for other classes, but we feel like things are still progressing well.  We determined that microwave control is, at the moment, more important to focus on than getting parts ordered, as that will be less of a bottleneck than controlling the microwave
+ 
+May 3rd – May 9th: Did not meet this week due to finals week and other commitments.  Set our summer schedule to meet on Tuesday and Thursday evenings at a minimum to work on the project.
+ 
+(Note, up until this point, we specifically planned to work little on this project.  Now that school is out, we are able to focus more time on completing it.)
+
+May 24th – May 30th: We used an oscilloscope to analyze the signals to and from the button matrix and found out that the data was being sent serially.  We decided to use relays to control the buttons.  Fried a few wires on accident.  Lesson learned: do not store wires in microwave.  Oops.
+
+May 31st – June 6th: Mounted the Arduino and relay boards onto the inner wall of the outer microwave shell and connected the two boards.  Connected the relay board to the microcontroller.
+
+
+
+
