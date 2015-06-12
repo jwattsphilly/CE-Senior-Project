@@ -1,0 +1,9 @@
+List of Expenses
+
+Microwave		$60
+Relay Board  		$0
+Arduino			$0
+Wiring			$0
+Soldering Supplies	$0
+Seek Camera		$300
+Android Tablet		$50
