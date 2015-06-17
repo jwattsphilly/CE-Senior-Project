@@ -12,8 +12,8 @@
 #define btnPower A0      // Connected to relay 12
 #define btnStart A1      // Connected to relay 13
 #define btnStop A2       // Connected to relay 14
-#define btnX A3          // connected to relay 15
-#define btnY A4          // connected to relay 16
+#define btnX A3          // Connected to relay 15
+#define btnY A4          // Connected to relay 16
 // Note: pin A5 is purple wire, not currently used
 // Note: pin 0 is red wire, not currently used
 // Note: pin 1 is brown wire, not currently used
@@ -65,7 +65,6 @@ void loop() {
      */
     serialCommand = Serial.read();
     switch (serialCommand) {
-      // Button  |  bc  => Push Cancel button
       case 'b':
         if (waitForSerial()) {
           serialParams = Serial.read();
@@ -129,11 +128,6 @@ void loop() {
 
       // Stop
       case 'S':
-        pushButton(btnStop);
-        break;
-
-      // Pause
-      case 'P':
         pushButton(btnStop);
         break;
     }
