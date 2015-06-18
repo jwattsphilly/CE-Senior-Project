@@ -20,6 +20,6 @@ May 24th – May 30th: We used an oscilloscope to analyze the signals to and fro
 
 May 31st – June 6th: Mounted the Arduino and relay boards onto the inner wall of the outer microwave shell and connected the two boards.  Connected the relay board to the microcontroller.
 
-June 7th - June 14th: Finished initial modifications to the microwave, fixed connections between the micro controller and the relay board.  Created a serial connection interface to control the microwave via our serial protocol or via the front panel buttons.  Got word back from Seek that they couldn’t supply us with a demo unit, exploring finding a discounted option.  Chose our tablet, about to buy.
+June 7th - June 13th: Finished initial modifications to the microwave, fixed connections between the micro controller and the relay board.  Created a serial connection interface to control the microwave via our serial protocol or via the front panel buttons.  Got word back from Seek that they couldn’t supply us with a demo unit, exploring finding a discounted option.  Chose our tablet, about to buy.
 
-
+June 14th - June 20th: Obtained a tablet that we will be interfacing with.  Downloaded the Android Studio software.
