@@ -1,0 +1,17 @@
+Project Timeline/Schedule:
+
+TASK TO COMPLETE:			COMPLETED BY (TENTATIVE):	CURRENT STATUS:
+
+Microwave Purchase: 			March 10th, 2015		Done
+Microwave Button Hacking:		June 11th, 2015			Done
+Arduino Control of Microwave:		June 11th, 2015			Done
+Tablet Purchase:			June 18th, 2015			Done
+Thermal Camera Purchase:		June 28th, 2015			Done
+Microwave Platter Control:		?				Not Started
+Thermal Camera Mounting:		?				Not Started
+Functional Android App:			?				In Progress
+Android App Interfacing w/ Arduino:	?				Not Started
+Android App Interfacing w/ Camera:	?				Not Started
+User Testing and Feedback:		?				Not Started
+Image Processing (Stretch Goal):	?				Not Started
+UPC Scanning (Stretch Goal):		?				Not Started
