@@ -7,7 +7,7 @@ Microwave Button Hacking:		June 11th, 2015			Done
 Arduino Control of Microwave:		June 11th, 2015			Done
 Tablet Purchase:			June 18th, 2015			Done
 Thermal Camera Purchase:		June 28th, 2015			Done
-Microwave Platter Control:		?				Not Started
+Microwave Platter Control:		?				In Progress
 Thermal Camera Mounting:		?				Not Started
 Functional Android App:			?				In Progress
 Android App Interfacing w/ Arduino:	?				Not Started
