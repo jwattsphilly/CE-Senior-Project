@@ -1,17 +1,17 @@
 Project Timeline/Schedule:
 
-TASK TO COMPLETE:			COMPLETED BY (TENTATIVE):	CURRENT STATUS:
+TASK TO COMPLETE:			COMPLETED BY (TENTATIVE):	CURRENT STATUS:		NOTES:
 
 Microwave Purchase: 			March 10th, 2015		Done
 Microwave Button Hacking:		June 11th, 2015			Done
 Arduino Control of Microwave:		June 11th, 2015			Done
 Tablet Purchase:			June 18th, 2015			Done
 Thermal Camera Purchase:		June 28th, 2015			Done
-Microwave Platter Control:		?				Not Started
+Microwave Platter Control:		?				In Progress		Will control spinning via the relay board, need to measure rotation times, times per weight, etc.
 Thermal Camera Mounting:		?				Not Started
-Functional Android App:			?				In Progress
+Functional Android App:			?				In Progress		Framework is running, still need to add database functionality. UPC scanning is in early stages, but is scanning.
 Android App Interfacing w/ Arduino:	?				Not Started
-Android App Interfacing w/ Camera:	?				Not Started
+Android App Interfacing w/ Camera:	?				In Progress		Can use the tablet camera to read UPC codes. No thermal camera connection yet.
 User Testing and Feedback:		?				Not Started
 Image Processing (Stretch Goal):	?				Not Started
-UPC Scanning (Stretch Goal):		?				Not Started
+UPC Scanning (Stretch Goal):		?				In Progress		Tablet can scan and recognize UPC codes. Next, need working database to start storing information. Chosen an H2 database structure.
