@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 public class MainActivity extends ActionBarActivity {
     public final static String EXTRA_MESSAGE = "nocomment.smartthermalmicrowave.MESSAGE";
@@ -39,10 +38,26 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
+    //Activity setup for Browse by Item
+    public void browseByItem(View view){
+        Intent intent = new Intent(this, BrowseByItem.class);
+        String message = "Browse By Item Button Pressed";
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    //Activity setup for Scan UPC
+    public void scanUPC(View view) {
+        Intent intent = new Intent(this, ScanUPC.class);
+        String message = "Scan UPC Button Pressed";
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    //Activity setup for Search By Name
+    public void searchByName(View view){
+        Intent intent = new Intent(this, SearchByName.class);
+        String message = "Search By Name Button Pressed";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }

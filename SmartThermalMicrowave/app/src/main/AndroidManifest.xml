@@ -6,7 +6,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:screenOrientation="landscape" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -15,6 +16,30 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".BrowseByItem"
+            android:label="@string/title_activity_browse"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SearchByName"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ScanUPC"
+            android:label="@string/title_activity_upc"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.MainActivity" />
         </activity>
     </application>
 
