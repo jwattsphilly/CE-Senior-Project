@@ -28,6 +28,8 @@
 
 int lastPushedButton = -1;
 char serialCommand, serialParams;
+int cookTimeRemaining = 0;
+long stopTimeMillis = 0;
 
 void setup() {
   pinMode(btn0, OUTPUT);          digitalWrite(btn0, HIGH);
@@ -48,11 +50,6 @@ void setup() {
   pinMode(btnY, OUTPUT);          digitalWrite(btnY, HIGH);
   
   Serial.begin(9600);
-  
-}
-
-void loopy() {
-  
 }
 
 /**
@@ -90,7 +87,9 @@ void loop() {
       // Time  |  t90;  => Set time to 90 seconds
       case 't':
         if (waitForSerial()) {
-          setTime(Serial.parseInt());
+          cookTimeRemaining = Serial.parseInt();
+          stopTimeMillis = millis() + (cookTimeRemaining*1000);
+          setTime(cookTimeRemaining);
         }
         break;
 
@@ -130,10 +129,18 @@ void loop() {
       case 'S':
         pushButton(btnStop);
         break;
+        
+      // Wait
+      case 'w':
+        int waitTime = Serial.parseInt();
+        while( millis() - stopTimeMillis >= 1000) {}   // Wait for timer to get to 1 second
+        pushButton(btnStop);                           // Press stop twice in order to clear
+        pushButton(btnStop);                           // the last cook time 
+        delay(waitTime * 1000);
+        break;
     }
   }
 }
-
 
 /*
 *  
