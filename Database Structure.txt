@@ -1,0 +1,4 @@
+No_Comment:
+
+Food
+ID_Number (int)	|	food_type (string)	|	brand_name (string)	|	UPC_barcode (long)	|	intstructions (string)
