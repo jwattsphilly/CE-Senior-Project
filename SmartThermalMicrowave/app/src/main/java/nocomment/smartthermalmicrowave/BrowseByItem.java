@@ -27,10 +27,6 @@ public class BrowseByItem extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UsbCommunicationManager USBCM = new UsbCommunicationManager(this);
-
-
-
         //Get the message from the intent
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
