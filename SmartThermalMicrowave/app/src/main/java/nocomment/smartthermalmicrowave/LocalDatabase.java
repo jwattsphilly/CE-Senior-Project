@@ -1,5 +1,7 @@
 package nocomment.smartthermalmicrowave;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.sql.*;
 
@@ -23,7 +25,8 @@ public class LocalDatabase {
         try
         {
             Class.forName("org.h2.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/NoComment", "sa", "");
+            DriverManager.setLoginTimeout(10);
+            conn = DriverManager.getConnection("jdbc:h2:tcp://nocomment.sipnswirlutah.com:8082/NoComment", "sa", "");
 
             PreparedStatement query = conn.prepareStatement("SELECT * FROM FOOD;");
 
@@ -45,8 +48,8 @@ public class LocalDatabase {
         }
         catch(Exception ex)
         {
-            System.err.println("Uh, oh!  Something bad happened:");
-            System.out.println(ex.getMessage());
+            Log.e("LocalDatabase","Uh, oh!  Something bad happened:");
+            Log.e("", ex.getMessage());
         }
         finally
         {

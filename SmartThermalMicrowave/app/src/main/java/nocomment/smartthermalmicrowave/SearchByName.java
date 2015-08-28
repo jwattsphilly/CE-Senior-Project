@@ -1,8 +1,10 @@
 package nocomment.smartthermalmicrowave;
 
 import android.content.Intent;
+import android.content.SyncStatusObserver;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -14,17 +16,28 @@ import java.sql.SQLException;
  */
 public class SearchByName extends ActionBarActivity {
 
+    //TODO Change the priority on this thread so that it doesn't interfere with other important processes
+    Thread databaseThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                LocalDatabase.populateFoodList();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            if(LocalDatabase.foodList.isEmpty())
+                Log.w(getLocalClassName(), "No data returned from remote database. Dang.");
+            Log.w(getLocalClassName(), LocalDatabase.foodList.toString());
+        }
+    });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_name);
 
-        try {
-            LocalDatabase.populateFoodList();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        databaseThread.start();
 
     }
     @Override

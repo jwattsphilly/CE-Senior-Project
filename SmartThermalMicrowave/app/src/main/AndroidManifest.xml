@@ -3,6 +3,7 @@
     package="nocomment.smartthermalmicrowave" >
 
     <uses-feature android:name="android.hardware.usb.UsbAccessory"></uses-feature>
+    <uses-permission android:name="android.permission.INTERNET" />
     
     <application
         android:allowBackup="true"
