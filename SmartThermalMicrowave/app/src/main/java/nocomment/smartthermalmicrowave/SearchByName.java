@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.sql.SQLException;
+
 /**
  * Created by Darin on 7/25/15.
  */
@@ -17,17 +19,13 @@ public class SearchByName extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_name);
 
-//        //Get the message from the intent
-//        Intent intent = getIntent();
-//        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-//
-//        //Create a textView to hold the message
-//        TextView textView = new TextView(this);
-//        textView.setTextSize(40);
-//        textView.setText(message);
-//
-//        //Set the text view as the activity layout
-//        setContentView(textView);
+        try {
+            LocalDatabase.populateFoodList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -44,5 +42,4 @@ public class SearchByName extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void sendMessage(View view){}
 }
