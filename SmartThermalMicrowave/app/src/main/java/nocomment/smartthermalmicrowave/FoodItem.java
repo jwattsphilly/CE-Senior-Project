@@ -58,4 +58,17 @@ public class FoodItem {
     public String getInstructions(){
         return instructions;
     }
+
+
+    @Override
+    public String toString()
+    {
+        String frozenString;
+        if(frozen)
+            frozenString = "Frozen";
+        else
+            frozenString = "Not Frozen";
+
+        return "Food Type: " + food_type + " (" + frozenString + ")" + "\tBrand Name: " + brand_name ;
+    }
 }

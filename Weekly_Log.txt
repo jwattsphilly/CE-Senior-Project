@@ -32,3 +32,5 @@ August 23rd - August 29th: Started adding database connection code to our app.  
 
 August 31st - September 5th: Made a very relieving breakthrough with the app/database connection.  We are finally able to connect to the food database remotely in our Java code.
 
+Sept 6th - 12th: Transferred the database to a new computer and made sure the connection still works. Works great! Got the tablet communicating with the database and displaying the information. Redesigned the UI so that searches by name and browsing are in the same activity. Looked into using android fragments, but will continue with android activities for now. Tested the microwave to verify all original buttons panel functionality. All is well. 
+

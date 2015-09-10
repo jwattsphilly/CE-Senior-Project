@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.List;
 
 /**
  * Created by jameswatts on 8/28/15.
@@ -26,7 +27,7 @@ public class LocalDatabase {
         {
             Class.forName("org.h2.Driver");
             DriverManager.setLoginTimeout(10);
-            conn = DriverManager.getConnection("jdbc:h2:tcp://nocomment.sipnswirlutah.com:8082/NoComment", "sa", "");
+            conn = DriverManager.getConnection("jdbc:h2:tcp://nocomment.sipnswirlutah.com:9092/~/NoComment", "sa", "");
 
             PreparedStatement query = conn.prepareStatement("SELECT * FROM FOOD;");
 
@@ -58,5 +59,24 @@ public class LocalDatabase {
         }
     }
 
+    public static List<FoodItem> getMatches(String foodName){
+        List<FoodItem> returnList = new ArrayList<FoodItem>();
+        for (FoodItem item:foodList) {
+            if(item.getFoodType().contains(foodName) || item.getBrandName().contains(foodName)){
+                returnList.add(item);
+            }
+        }
+        return returnList;
+    }
+
+    public static List<FoodItem> getMatches(long UPC){
+        List<FoodItem> returnList = new ArrayList<FoodItem>();
+        for (FoodItem item:foodList) {
+            if(item.getUPC() == UPC) {
+                returnList.add(item);
+            }
+        }
+        return returnList;
+    }
 
 }
