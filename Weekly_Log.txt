@@ -34,5 +34,5 @@ August 31st - September 5th: Made a very relieving breakthrough with the app/dat
 
 Sept 6th - 12th: Transferred the database to a new computer and made sure the connection still works. Works great! Got the tablet communicating with the database and displaying the information. Redesigned the UI so that searches by name and browsing are in the same activity. Looked into using android fragments, but will continue with android activities for now. Tested the microwave to verify all original buttons panel functionality. All is well. 
 
-Sept 13th - 19th:
+Sept 13th - 19th: Went to the ABET meeting and then met with Ken. Mounted the microwave on a temporary particleboard platform. Reassembled the microwave and tested that it still works. Designed an activity hierarchy for the app. The app now searches by name and by manually entered UPC and the results display perfectly in the temporary text view. Started setting up UPC scanning and have partial success. We believe that we need to edit the AndroidManifest.xml and possibly create a separate activity. Verified that the local database functions work well.
 

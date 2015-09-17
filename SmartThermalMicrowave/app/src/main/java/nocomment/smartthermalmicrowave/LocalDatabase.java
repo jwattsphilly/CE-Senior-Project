@@ -62,7 +62,8 @@ public class LocalDatabase {
     public static List<FoodItem> getMatches(String foodName){
         List<FoodItem> returnList = new ArrayList<FoodItem>();
         for (FoodItem item:foodList) {
-            if(item.getFoodType().contains(foodName) || item.getBrandName().contains(foodName)){
+            if(item.getFoodType().toLowerCase().contains(foodName.toLowerCase()) ||
+                    item.getBrandName().toLowerCase().contains(foodName.toLowerCase())){
                 returnList.add(item);
             }
         }

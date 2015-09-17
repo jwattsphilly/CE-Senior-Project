@@ -12,4 +12,5 @@
     <string name="title_activity_upc">Scan a UPC Code</string>
     <string name="main_page_title">Welcome!</string>
     <string name="scan">Scan</string>
+    <string name="search_results">Search Results</string>
 </resources>

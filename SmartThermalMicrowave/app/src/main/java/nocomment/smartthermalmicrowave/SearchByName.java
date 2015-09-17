@@ -16,7 +16,8 @@ import java.sql.SQLException;
 /**
  * Created by Darin on 7/25/15.
  */
-public class SearchByName extends FragmentActivity {
+public class SearchByName extends ActionBarActivity {
+    public final static String SEARCH_STRING = "nocomment.smartthermalmicrowave.EXTRA_SEARCH_STRING";
 
     //TODO Change the priority on this thread so that it doesn't interfere with other important processes
     Thread databaseThread = new Thread(new Runnable() {
@@ -40,12 +41,10 @@ public class SearchByName extends FragmentActivity {
 
         databaseThread.start();
 
-//        while(LocalDatabase.foodList.isEmpty()){}   //TODO This is a bad plan...
-//
-//        TextView textView = new TextView(this);
+        while(LocalDatabase.foodList.isEmpty()){}   //TODO This is a bad plan...
+
 //        for (FoodItem item: LocalDatabase.foodList)
 //            textView.append(item.toString() + "\n");
-
         setContentView(R.layout.activity_search_by_name);
 
     }
@@ -62,5 +61,14 @@ public class SearchByName extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void executeSearch(View view)
+    {
+        Intent intent = new Intent(this, DisplaySearchResults.class);
+        EditText editText = (EditText) findViewById(R.id.edit_message);
+        String message = editText.getText().toString();
+        intent.putExtra(SEARCH_STRING, message);
+        startActivity(intent);
     }
 }

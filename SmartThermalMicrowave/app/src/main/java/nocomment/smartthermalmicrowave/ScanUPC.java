@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import com.google.zxing.integration.android.IntentResult;
  * Created by Darin on 7/25/15.
  */
 public class ScanUPC extends ActionBarActivity implements View.OnClickListener {
+    public final static String UPC_SEARCH_STRING = "nocomment.smartthermalmicrowave.EXTRA_UPC_SEARCH_STRING";
+
     private Button scanBtn;
     private TextView formatTxt, contentTxt;
 
@@ -64,6 +67,10 @@ public class ScanUPC extends ActionBarActivity implements View.OnClickListener {
         if (scanningResult != null) {
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
+
+            Intent upc_intent = new Intent(this, DisplaySearchResults.class);
+            upc_intent.putExtra(UPC_SEARCH_STRING, scanContent);
+            startActivity(upc_intent);
 
             formatTxt.setText("FORMAT: " + scanFormat);
             contentTxt.setText("CONTENT: " + scanContent);
