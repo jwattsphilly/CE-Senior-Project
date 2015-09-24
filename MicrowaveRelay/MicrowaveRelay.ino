@@ -129,15 +129,6 @@ void loop() {
       case 'S':
         pushButton(btnStop);
         break;
-        
-      // Wait
-      case 'w':
-        int waitTime = Serial.parseInt();
-        while( millis() - stopTimeMillis >= 1000) {}   // Wait for timer to get to 1 second
-        pushButton(btnStop);                           // Press stop twice in order to clear
-        pushButton(btnStop);                           // the last cook time 
-        delay(waitTime * 1000);
-        break;
     }
   }
 }
@@ -148,6 +139,7 @@ void loop() {
 void pushButton(int button) {
   if(button == lastPushedButton) {delay(100);}
   
+  delay(250);
   digitalWrite(button, LOW);
   delay(button == btnStart ? 300 : 100);  // Start button needs a longer press
   digitalWrite(button, HIGH);
@@ -174,11 +166,7 @@ bool waitForSerial() {
 void setTime(int totalSeconds) {
   if (totalSeconds > MAX_SECONDS) { return; }
 
-  // Setting time will stop the microwave
-  //if (on) { on = false; }
-
   int minutes, seconds;
-  //currentTime = totalSeconds;
 
   pushButton(btnTimeCook);
 
@@ -187,14 +175,14 @@ void setTime(int totalSeconds) {
 
   if (minutes != 0) {
     if (minutes / 10 != 0) {
-      pushButton(minutes / 10);
+      pushButton((minutes / 10) + 2);
     }
-    pushButton(minutes % 10);
+    pushButton((minutes % 10) + 2);
   }
   if (seconds >= 10 || minutes != 0) {
-    pushButton(seconds / 10);
+    pushButton((seconds / 10) + 2);
   }
-  pushButton(seconds % 10);
+  pushButton((seconds % 10) + 2);
 }
 
 /*
@@ -206,10 +194,10 @@ void setPower(int power) {
   pushButton(btnPower);
 
   if (power == 10) {
-    pushButton(1);
-    pushButton(0);
+    pushButton(btn1);
+    pushButton(btn0);
   } else {
-    pushButton(power);
+    pushButton(power + 2);
   }
 }
 
