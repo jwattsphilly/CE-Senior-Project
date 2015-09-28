@@ -45,12 +45,20 @@
                 android:value="nocomment.smartthermalmicrowave.MainActivity" />
         </activity>
         <activity
-            android:name=".DisplaySearchResults"
+            android:name=".DisplaySearchResultsSBN"
             android:label="@string/search_results"
             android:parentActivityName="nocomment.smartthermalmicrowave.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nocomment.smartthermalmicrowave.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DisplaySearchResultsUPC"
+            android:label="@string/search_results"
+            android:parentActivityName="nocomment.smartthermalmicrowave.ScanUPC" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.ScanUPC" />
         </activity>
     </application>
 

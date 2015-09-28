@@ -4,19 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Darin on 9/16/15.
+ * Created by Darin on 9/23/15.
  */
-public class DisplaySearchResults extends ActionBarActivity {
+public class DisplaySearchResultsUPC extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +34,7 @@ public class DisplaySearchResults extends ActionBarActivity {
             }
         }
         catch(NumberFormatException nfe) {
-            //If searchString was a string
-            String searchString = intent.getStringExtra(SearchByName.SEARCH_STRING);
-            resultsReturned = LocalDatabase.getMatches(searchString);
+            throw new NumberFormatException("Invalid UPC.");
         }
 
         if (resultsReturned.size() == 0)

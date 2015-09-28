@@ -3,16 +3,40 @@ package nocomment.smartthermalmicrowave;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.sql.SQLException;
+
 public class MainActivity extends ActionBarActivity {
     public final static String EXTRA_MESSAGE = "nocomment.smartthermalmicrowave.MESSAGE";
+
+    //TODO Change the priority on this thread so that it doesn't interfere with other important processes
+    Thread databaseThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                LocalDatabase.populateFoodList();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            if(LocalDatabase.foodList.isEmpty())
+                Log.w(getLocalClassName(), "No data returned from remote database. Dang.");
+            Log.w(getLocalClassName(), "Updated the food list");
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        databaseThread.start();
+
+        while(LocalDatabase.foodList.isEmpty()){}   //TODO This is a bad plan...
+
         setContentView(R.layout.activity_main);
     }
 

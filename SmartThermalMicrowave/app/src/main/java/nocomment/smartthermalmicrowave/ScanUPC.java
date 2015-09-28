@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +26,15 @@ public class ScanUPC extends ActionBarActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_upc);
 
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        scanIntegrator.initiateScan();
+
         //Set up the UPC Scanner stuff
         scanBtn = (Button)findViewById(R.id.scan_button);
-        formatTxt = (TextView)findViewById(R.id.scan_format);
-        contentTxt = (TextView)findViewById(R.id.scan_content);
-
-        //Set up the button listener
+//        formatTxt = (TextView)findViewById(R.id.scan_format);
+//        contentTxt = (TextView)findViewById(R.id.scan_content);
+//
+//        //Set up the button listener
         scanBtn.setOnClickListener(this);
 
     }
@@ -68,12 +70,14 @@ public class ScanUPC extends ActionBarActivity implements View.OnClickListener {
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
 
-            Intent upc_intent = new Intent(this, DisplaySearchResults.class);
+            Intent upc_intent = new Intent(this, DisplaySearchResultsUPC.class);
             upc_intent.putExtra(UPC_SEARCH_STRING, scanContent);
             startActivity(upc_intent);
 
-            formatTxt.setText("FORMAT: " + scanFormat);
-            contentTxt.setText("CONTENT: " + scanContent);
+            //Only uncomment these if you uncomment the button and information
+            //parts in the onCreate activity
+//            formatTxt.setText("FORMAT: " + scanFormat);
+//            contentTxt.setText("CONTENT: " + scanContent);
         }
 
         //If we get a null return value from the scanning program
