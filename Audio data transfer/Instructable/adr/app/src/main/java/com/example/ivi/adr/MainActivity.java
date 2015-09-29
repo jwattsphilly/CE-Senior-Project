@@ -1,9 +1,5 @@
 package com.example.ivi.adr;
 
-
-
-
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 
@@ -13,9 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
-
 
 public class MainActivity extends AppCompatActivity {
     private EditText password;
@@ -47,13 +40,27 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
 
 
-                Sketch.karli(password.getText().toString());
+                Sketch.parseEditTextInput(password.getText().toString());
             }
 
         });
 
     }
 
+    public EditText getPassword() {
+        return password;
+    }
 
+    public void setPassword(EditText password) {
+        this.password = password;
+    }
+
+    public Button getBtnSubmit() {
+        return btnSubmit;
+    }
+
+    public void setBtnSubmit(Button btnSubmit) {
+        this.btnSubmit = btnSubmit;
+    }
 }
 
