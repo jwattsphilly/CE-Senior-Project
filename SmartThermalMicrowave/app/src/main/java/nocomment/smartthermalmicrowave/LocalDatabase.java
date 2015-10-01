@@ -80,4 +80,109 @@ public class LocalDatabase {
         return returnList;
     }
 
+    public static String parseInstructionString(FoodItem food)
+    {
+        return parseInstructionString(food.getInstructions());
+    }
+
+    public static String parseInstructionString(String instructions)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        for(int index=0; index<instructions.length(); index++)
+        {
+            switch(instructions.charAt(index))
+            {
+                case 't':
+                    sb.append("Set timer to: ");
+
+                    try{
+                        String restOfString = instructions.substring(index+1);
+
+                        String[] numbers = restOfString.split("^[0-9]+");
+
+                        sb.append(numbers[0] + " Seconds\n");  // TODO: Test this!!!!!
+                    }
+                    catch(Exception ex){
+                        sb.append("Couldn't find Number!\n");
+                    }
+                    break;
+
+                case 'p':
+                    sb.append("Power Level Set to: ");
+
+                    try{
+                        if(instructions.charAt(index+1) == 'i')
+                        {
+                            String restOfString = instructions.substring(index+1);
+                            String[] numbers = restOfString.split("^[0-9]+");
+
+                            sb.append(numbers[0] + "\n");  // TODO: Test this!!!!!
+                        }
+                        else if(instructions.charAt(index+1) == 'l')
+                        {
+                            switch(instructions.charAt(index+2))
+                            {
+                                case 'h': sb.append("High (10)\n");
+                                case 'm': sb.append("Medium (7)\n");
+                                case 'l': sb.append("Low (5)\n");
+                                case 'd': sb.append("Defrost (3)\n");
+                                case 'z': sb.append("Zero (0)\n");
+                                defualt: sb.append("Unknown power level\n");
+                            }
+                        }
+                    }
+                    catch(Exception ex){
+                        sb.append("No Power Level Given\n");
+                    }
+                    break;
+
+                case 's':
+                    sb.append("Start!\n");
+                    break;
+
+                case 'S':
+                    sb.append("Stop!\n");
+                    break;
+
+                case 'P':
+                    sb.append("Pause!\n");
+                    break;
+
+                case 'r':
+                    sb.append("Stir!\n");
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        return sb.toString();
+    }
+
+
+    public ArrayList<String> splitInstructions(String instructions)
+    {
+        ArrayList<String> returnList = new ArrayList<String>();
+        String restOfString = instructions;
+
+        int stirIndex = restOfString.indexOf('r');  // Get first stir instruction (if it exists)
+
+        while(stirIndex >= 0)
+        {
+            // Get the first part of the instruction
+            returnList.add(restOfString.substring(0, stirIndex));
+            // Get the rest of the instruction
+            restOfString = restOfString.substring(stirIndex+1);
+            // Check to see if there're anymore stir instructions
+            stirIndex = restOfString.indexOf('r');
+        }
+
+        returnList.add(restOfString);  // Add the last instructions
+
+        return returnList;
+    }
+
+
+
 }

@@ -36,3 +36,7 @@ Sept 6th - 12th: Transferred the database to a new computer and made sure the co
 
 Sept 13th - 19th: Went to the ABET meeting and then met with Ken. Mounted the microwave on a temporary particleboard platform. Reassembled the microwave and tested that it still works. Designed an activity hierarchy for the app. The app now searches by name and by manually entered UPC and the results display perfectly in the temporary text view. Started setting up UPC scanning and have partial success. We believe that we need to edit the AndroidManifest.xml and possibly create a separate activity. Verified that the local database functions work well.
 
+Sept 20th - 26th: Mounted the microwave on a permanent acrylic platform.  Rewired Arduino connections to the microwave and checked to make sure everything was still working.  Repaired errors in Arduino code.  Now all legal messages sent to Arduino are properly handled.  Wrote code for converting instruction strings into human readable text.  UPC scanning and database querying now fully functional.  Great week!  Yay! :) 
+
+Sept 27th - Oct 3rd: Got a hold of the code for an audio decoder to send messages from the tablet to the Arduino.  Edited the code through optimization and renaming horridly-named variables.  Ended up reprogramming the entire Android-to-Arduino interface so that it is actually an app instead of an applet.  There are a few bugs, but they will hopefully be resolved by next time.  Added the instruction parsing code to the application, though it’s not quite integrated yet.
+
