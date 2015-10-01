@@ -43,7 +43,7 @@ public class Sketch extends PApplet {
         textSize(50);
         bitSelector = 1;
         payloadByte = 0x7D;//125
-
+        setupMediaPlayer();
     }
 
     public static void parseEditTextInput(String input) {
@@ -54,7 +54,6 @@ public class Sketch extends PApplet {
 //        for(int i=0; i< inputChars.length; i++)
 //            payloadBytes[i] = parseByte(inputChars[i]);
         payloadByte = parseInt(input);
-
     }
 
     @Override
@@ -63,11 +62,27 @@ public class Sketch extends PApplet {
         text("PUSH " + "\n" + "\n" +
                 "TO SEND: " + payloadByte, width / 2, height / 2);
         //payloadByte=parseInt(value);
+        sendData();
+    }
+
+
+    private void setupMediaPlayer() {
+        snd = new MediaPlayer();
+        try {
+            fd = asset.openFd("lnoise.wav");
+            snd.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
+            snd.prepare();
+            snd.start();
+        } catch (IOException e) {
+            println("prepare failed");
+        }
+    }
+    private void sendData()
+    {
         if (!isTransmitting) {
-            stp();
+            snd.setVolume(1,1);
             isTransmitting = true;
         }
-        //data send block
 
         if (mousePressed) {
             screenTouched = true;
@@ -93,19 +108,6 @@ public class Sketch extends PApplet {
         delay(10);
         if (!snd.isPlaying()) {
             isTransmitting = false;
-        }
-    }
-
-
-    void stp() {
-        snd = new MediaPlayer();
-        try {
-            fd = asset.openFd("lnoise.wav");
-            snd.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
-            snd.prepare();
-            snd.start();
-        } catch (IOException e) {
-            println("prepare failed");
         }
     }
 }

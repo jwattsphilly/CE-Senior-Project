@@ -8,7 +8,7 @@
     <EditText
         android:layout_width="131dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/payload_val_input"
         android:layout_gravity="center_horizontal|top"
         android:inputType="text" />
 
@@ -16,6 +16,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update"
-        android:id="@+id/button"
+        android:id="@+id/btn_update"
         android:layout_gravity="left|top" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Text"
+            android:textSize="30dp"
+            android:id="@+id/payload_val_text"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payload_val_text"
+            android:width="300dp"
+            android:height="300dp"
+            android:text="PUSH TO SEND"
+            android:textSize="30dp"
+            android:id="@+id/btn_send"/>
+    </RelativeLayout>
 </FrameLayout>
