@@ -1,0 +1,118 @@
+float read_input, input_base_level;
+int interrupt_count_1, interrupt_count_2, wait_count, next_bit_in_received_byte, received_int,unknown_var_1,unknown_var_2;
+byte b, byt;
+boolean l_sig, base_level_set;
+void setup()
+{
+  // put your setup code here, to run once:
+  DDRB |= B00100000;//pin 13 out
+
+  //DDRB &= ~B00010000;//pin 12 in
+
+  cli();          // disable global interrupts, started again with sei(), same as noInterrupts()
+  TCCR1A = 0;     // set entire TCCR1A register to 0
+  TCCR1B = 0;     // same for TCCR1B
+
+  // set compare match register to desired timer count:
+  OCR1A = 5; //how many cycles of 62.5 ns//5 this controls the timer. it increments the built in timer once every 5 ticks of tehe clock
+
+  // turn on CTC mode:
+  TCCR1B |= (1 << WGM12);
+
+  // Set CS10 bit for no prescaler:
+  TCCR1B |= (1 << CS10);  // divide the clock by 1 (why do we need this?)
+  TCCR1B |= (1 << CS12);  // divide the clock by 1024 prescaler
+
+  // enable timer compare interrupt:
+  TIMSK1 |= (1 << OCIE1A);
+
+  // enable global interrupts:
+  sei(); // re-enables interrupts, same as interrupts() method
+  unknown_var_1=0;
+  interrupt_count_1 = 0;
+  interrupt_count_2 = 0;
+  wait_count = 0;
+  received_int = 0x00;
+  next_bit_in_received_byte = 0x01;
+  byt = 0x7D; //compare byte 0111 1101
+  
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  b = 0;
+  interrupt_count_1 = 0x01;
+  
+  //Serial.println(unknown_var_2);
+  
+  while (interrupt_count_1 < 0x400)  //measure the SI
+  { 
+    read_input = analogRead(A1);
+
+    if (read_input > unknown_var_2)
+      b |= interrupt_count_1; //volt baz +~3; check measurement
+  }
+
+  wait_count++;
+
+  if (wait_count > 10)  //reset byte after a while of pause
+  { 
+    wait_count = 0;
+    received_int = 0;
+    next_bit_in_received_byte = 0x01;
+  }
+ 
+  if (b > 0)  //detect the high decibel signal
+  {
+    wait_count = 0; //set to zero;
+    l_sig = true;
+    interrupt_count_2++;
+  } 
+
+  else if (l_sig && b == 0)  //when it gets low,get the length,data encoding start**
+  { 
+   // Serial.println(unknown_var_2);//Debuger
+    
+    // write the byte
+    if (interrupt_count_2 > 20)
+      received_int |= next_bit_in_received_byte;
+    
+    next_bit_in_received_byte <<= 1;
+
+    if (next_bit_in_received_byte > 0x80) //if byte ready to be printed
+    {
+
+      Serial.println(received_int);
+      
+      if (received_int == byt)
+        PORTB |= 0x20;
+      
+      else 
+        PORTB &= ~0x20;
+      
+      next_bit_in_received_byte = 0x01;
+      received_int = 0;
+    }
+
+    l_sig = false;
+    interrupt_count_2 = 0;
+  }
+}
+
+ISR(TIMER1_COMPA_vect)  // Replace the overflow ISR with a compare match version (set up the timer)
+{
+  interrupt_count_1 <<= 1;
+  
+  //volume stabilizer #beta//put volume to max
+  if(!base_level_set)
+  {
+    input_base_level += analogRead(A1);
+    unknown_var_1 += 1;
+    if(unknown_var_1 > 20)
+    {
+      unknown_var_2 = int(input_base_level / unknown_var_1) + 4;
+      base_level_set = true;
+    }
+  }
+}
