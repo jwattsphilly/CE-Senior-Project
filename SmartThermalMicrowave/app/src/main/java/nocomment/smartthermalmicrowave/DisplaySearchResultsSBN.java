@@ -3,9 +3,12 @@ package nocomment.smartthermalmicrowave;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -24,21 +27,26 @@ public class DisplaySearchResultsSBN extends ActionBarActivity {
         setContentView(R.layout.activity_display_search_results);
 
         Intent intent = getIntent();
-        TextView results = (TextView) findViewById(R.id.search_results);
-        results.setTextSize(22);
 
         List<FoodItem> resultsReturned = new ArrayList<FoodItem>();
 
         String searchString = intent.getStringExtra(SearchByName.SEARCH_STRING);
         resultsReturned = LocalDatabase.getMatches(searchString);
 
-        if (resultsReturned.size() == 0)
-            results.setText("Doh! No results found.");
+        if (resultsReturned.size() == 0){
+            List<String> resultsReturnedString = new ArrayList<String>();
+            resultsReturnedString.add("Doh! No results found.");
 
-        for (FoodItem item : resultsReturned) {
-            results.append(item.toString() + "\n");
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, resultsReturnedString);
+            ListView listView = (ListView) findViewById(R.id.search_results);
+            listView.setAdapter(arrayAdapter);
         }
-
+        else
+        {
+            ArrayAdapter<FoodItem> arrayAdapter = new ArrayAdapter<FoodItem>(this, android.R.layout.simple_expandable_list_item_1, resultsReturned);
+            ListView listView = (ListView) findViewById(R.id.search_results);
+            listView.setAdapter(arrayAdapter);
+        }
 
     }
     @Override

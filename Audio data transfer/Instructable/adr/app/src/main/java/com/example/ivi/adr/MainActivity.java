@@ -12,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private EditText payloadDataInput;
@@ -65,7 +63,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Data Sent",
                         Toast.LENGTH_SHORT).show();
-                sendData();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        sendData();
+                    }
+                }).start();
             }
         });
 
@@ -99,10 +103,9 @@ public class MainActivity extends AppCompatActivity {
     private void setupMediaPlayer() {
         mediaPlayer = new MediaPlayer();
         try {
-            fd = asset.openFd("lnoise.wav");
+            fd = asset.openFd("A440.mp3");
             mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
             mediaPlayer.prepare();
-            mediaPlayer.setVolume(0, 0);
             mediaPlayer.start();
             mediaPlayer.pause();
         } catch (IOException e) {
@@ -119,24 +122,24 @@ public class MainActivity extends AppCompatActivity {
 
             //Create a small gap with no noise
             mediaPlayer.setVolume(0, 0);
-            delay(10);
+            delay(20);
 
             //Start transmission of bit
             mediaPlayer.setVolume(1, 1);
             if (bytc == 0) {
-                delay(30);  //0
+                delay(30);  //0  Originally 30ms
             } else {
-                delay(130); //1
+                delay(130); //1  Originally 130ms
             }
             //Stop bit transmission
             mediaPlayer.setVolume(0, 0);
 
             bitSelector <<= 1;
-            delay(10);
+            delay(20);
         }
         bitSelector = 1;
-        mediaPlayer.seekTo(0);
-        mediaPlayer.pause();
+        mediaPlayer.seekTo(0);  //Start the media file at the beginning
+        mediaPlayer.pause();    //Get ready for the next send
     }
 
     private void delay(long milliseconds)
