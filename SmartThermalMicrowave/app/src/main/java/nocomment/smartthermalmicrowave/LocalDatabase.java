@@ -101,7 +101,7 @@ public class LocalDatabase {
 
                         String[] numbers = restOfString.split("^[0-9]+");
 
-                        sb.append(numbers[0] + " Seconds\n");  // TODO: Test this!!!!!
+                        sb.append(numbers[0] + " Seconds\n");  // TODO: Test this!
                     }
                     catch(Exception ex){
                         sb.append("Couldn't find Number!\n");
@@ -160,8 +160,7 @@ public class LocalDatabase {
         return sb.toString();
     }
 
-
-    public ArrayList<String> splitInstructions(String instructions)
+    public static ArrayList<String> splitInstructions(String instructions)
     {
         ArrayList<String> returnList = new ArrayList<String>();
         String restOfString = instructions;
@@ -183,6 +182,37 @@ public class LocalDatabase {
         return returnList;
     }
 
+    public static int getTotalSeconds(String fullCodedInstruction)
+    {
+        int seconds = 0;
 
+        for(int i=0; i<fullCodedInstruction.length(); i++)
+        {
+            if(fullCodedInstruction.charAt(i) == 't')
+            {
+                try{
+                    String restOfString = fullCodedInstruction.substring(i+1);
+                    String[] numbers = restOfString.split("^[0-9]+");
+                    seconds += Integer.parseInt(numbers[0]);
+                }
+                catch(Exception ex){
+                    // String not formatted correctly
+                }
+            }
+        }
+
+        return seconds;
+    }
+
+    public static int getTotalSeconds(ArrayList<String> instructionList)
+    {
+        int seconds = 0;
+
+        for (String inst:instructionList) {
+            seconds += getTotalSeconds(inst);
+        }
+
+        return seconds;
+    }
 
 }
