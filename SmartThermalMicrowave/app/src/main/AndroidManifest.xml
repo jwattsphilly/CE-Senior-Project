@@ -16,7 +16,6 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -47,10 +46,10 @@
         <activity
             android:name=".DisplaySearchResultsSBN"
             android:label="@string/search_results"
-            android:parentActivityName="nocomment.smartthermalmicrowave.MainActivity" >
+            android:parentActivityName="nocomment.smartthermalmicrowave.SearchByName" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="nocomment.smartthermalmicrowave.MainActivity" />
+                android:value="nocomment.smartthermalmicrowave.SearchByName" />
         </activity>
         <activity
             android:name=".DisplaySearchResultsUPC"
@@ -59,6 +58,30 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nocomment.smartthermalmicrowave.ScanUPC" />
+        </activity>
+        <activity
+            android:name=".InstructionsActivity"
+            android:label="Food Item"
+            android:parentActivityName="nocomment.smartthermalmicrowave.DisplaySearchResultsSBN" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.DisplaySearchResultsSBN" />
+        </activity>
+        <activity
+            android:name=".MicrowaveRunningActivity"
+            android:label="Food Item"
+            android:parentActivityName="nocomment.smartthermalmicrowave.InstructionsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.InstructionsActivity" />
+        </activity>
+        <activity
+            android:name=".EnjoyActivity"
+            android:label="Food Item"
+            android:parentActivityName="nocomment.smartthermalmicrowave.InstructionsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.InstructionsActivity" />
         </activity>
     </application>
 

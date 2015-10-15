@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -43,9 +44,28 @@ public class DisplaySearchResultsSBN extends ActionBarActivity {
         }
         else
         {
-            ArrayAdapter<FoodItem> arrayAdapter = new ArrayAdapter<FoodItem>(this, android.R.layout.simple_expandable_list_item_1, resultsReturned);
-            ListView listView = (ListView) findViewById(R.id.search_results);
+            ArrayAdapter<FoodItem> arrayAdapter = new ArrayAdapter<FoodItem>(this, android.R.layout.simple_list_item_1, resultsReturned);
+            final ListView listView = (ListView) findViewById(R.id.search_results);
             listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+
+                    FoodItem selectedFood = (FoodItem) listView.getItemAtPosition(position);
+
+                    Intent intention = new Intent(DisplaySearchResultsSBN.this, InstructionsActivity.class);
+
+                    Bundle foodItemBundle = new Bundle();
+                    foodItemBundle.putString("Food_Type", selectedFood.getFoodType());
+                    foodItemBundle.putString("Brand_Name", selectedFood.getBrandName());
+                    foodItemBundle.putBoolean("Frozen", selectedFood.getFrozen());
+                    foodItemBundle.putString("Instructions", selectedFood.getInstructions());
+
+                    intention.putExtra("FoodItemBundle", foodItemBundle);
+
+                    startActivity(intention);
+                }
+            });
         }
 
     }

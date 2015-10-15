@@ -99,9 +99,12 @@ public class LocalDatabase {
                     try{
                         String restOfString = instructions.substring(index+1);
 
-                        String[] numbers = restOfString.split("^[0-9]+");
+                        String[] numbers = restOfString.split("[a-zA-Z]+");
 
-                        sb.append(numbers[0] + " Seconds\n");  // TODO: Test this!
+                        if(numbers[0].equals(""))
+                            sb.append(numbers[1] + " Seconds\n");
+                        else
+                            sb.append(numbers[0] + " Seconds\n");
                     }
                     catch(Exception ex){
                         sb.append("Couldn't find Number!\n");
@@ -115,20 +118,23 @@ public class LocalDatabase {
                         if(instructions.charAt(index+1) == 'i')
                         {
                             String restOfString = instructions.substring(index+1);
-                            String[] numbers = restOfString.split("^[0-9]+");
+                            String[] numbers = restOfString.split("[a-zA-Z]+");
 
-                            sb.append(numbers[0] + "\n");  // TODO: Test this!!!!!
+                            if(numbers[0].equals(""))
+                                sb.append(numbers[1] + "\n");
+                            else
+                                sb.append(numbers[0] + "\n");
                         }
                         else if(instructions.charAt(index+1) == 'l')
                         {
                             switch(instructions.charAt(index+2))
                             {
-                                case 'h': sb.append("High (10)\n");
-                                case 'm': sb.append("Medium (7)\n");
-                                case 'l': sb.append("Low (5)\n");
-                                case 'd': sb.append("Defrost (3)\n");
-                                case 'z': sb.append("Zero (0)\n");
-                                defualt: sb.append("Unknown power level\n");
+                                case 'h': sb.append("High (10)\n"); break;
+                                case 'm': sb.append("Medium (7)\n"); break;
+                                case 'l': sb.append("Low (5)\n"); break;
+                                case 'd': sb.append("Defrost (3)\n"); break;
+                                case 'z': sb.append("Zero (0)\n"); break;
+                                default: sb.append("Unknown power level\n"); break;
                             }
                         }
                     }
@@ -138,19 +144,19 @@ public class LocalDatabase {
                     break;
 
                 case 's':
-                    sb.append("Start!\n");
+                    sb.append("Start\n");
                     break;
 
                 case 'S':
-                    sb.append("Stop!\n");
+                    sb.append("Stop\n");
                     break;
 
                 case 'P':
-                    sb.append("Pause!\n");
+                    sb.append("Pause\n");
                     break;
 
                 case 'r':
-                    sb.append("Stir!\n");
+                    sb.append("Stir\n");
                     break;
 
                 default:
@@ -192,7 +198,7 @@ public class LocalDatabase {
             {
                 try{
                     String restOfString = fullCodedInstruction.substring(i+1);
-                    String[] numbers = restOfString.split("^[0-9]+");
+                    String[] numbers = restOfString.split("[a-zA-Z]+");
                     seconds += Integer.parseInt(numbers[0]);
                 }
                 catch(Exception ex){
@@ -213,6 +219,17 @@ public class LocalDatabase {
         }
 
         return seconds;
+    }
+
+    public static String secondsToString(int time)
+    {
+        int minutes = time / 60;
+        int seconds = time % 60;
+
+        String minutesString = (minutes > 9)? ""+minutes: "0"+minutes;
+        String secondsString = (seconds > 9)? ""+seconds: "0"+seconds;
+
+        return minutesString + ":" + secondsString;
     }
 
 }

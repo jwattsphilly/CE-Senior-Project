@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,8 +24,6 @@ public class DisplaySearchResultsUPC extends ActionBarActivity {
         setContentView(R.layout.activity_display_search_results);
 
         Intent intent = getIntent();
-        TextView results = (TextView) findViewById(R.id.search_results);
-        results.setTextSize(22);
 
         List<FoodItem> resultsReturned = new ArrayList<FoodItem>();
 
@@ -37,11 +39,38 @@ public class DisplaySearchResultsUPC extends ActionBarActivity {
             throw new NumberFormatException("Invalid UPC.");
         }
 
-        if (resultsReturned.size() == 0)
-            results.setText("Doh! No results found.");
+        if (resultsReturned.size() == 0){
+            List<String> resultsReturnedString = new ArrayList<String>();
+            resultsReturnedString.add("Doh! No results found.");
 
-        for (FoodItem item : resultsReturned) {
-            results.append(item.toString() + "\n");
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, resultsReturnedString);
+            ListView listView = (ListView) findViewById(R.id.search_results);
+            listView.setAdapter(arrayAdapter);
+        }
+        else
+        {
+            ArrayAdapter<FoodItem> arrayAdapter = new ArrayAdapter<FoodItem>(this, android.R.layout.simple_list_item_1, resultsReturned);
+            final ListView listView = (ListView) findViewById(R.id.search_results);
+            listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+
+                    FoodItem selectedFood = (FoodItem) listView.getItemAtPosition(position);
+
+                    Intent intention = new Intent(DisplaySearchResultsUPC.this, InstructionsActivity.class);
+
+                    Bundle foodItemBundle = new Bundle();
+                    foodItemBundle.putString("Food_Type", selectedFood.getFoodType());
+                    foodItemBundle.putString("Brand_Name", selectedFood.getBrandName());
+                    foodItemBundle.putBoolean("Frozen", selectedFood.getFrozen());
+                    foodItemBundle.putString("Instructions", selectedFood.getInstructions());
+
+                    intention.putExtra("FoodItemBundle", foodItemBundle);
+
+                    startActivity(intention);
+                }
+            });
         }
 
 

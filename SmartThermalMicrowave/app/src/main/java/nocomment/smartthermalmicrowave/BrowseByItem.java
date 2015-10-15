@@ -61,14 +61,25 @@ public class BrowseByItem extends ActionBarActivity {
         else
         {
             ArrayAdapter<FoodItem> arrayAdapter = new ArrayAdapter<FoodItem>(this, android.R.layout.simple_list_item_1, resultsReturned);
-            ListView listView = (ListView) findViewById(R.id.browse_results);
+            final ListView listView = (ListView) findViewById(R.id.browse_results);
             listView.setAdapter(arrayAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
-                    TextView clickedView = (TextView) view;
 
-                    Toast.makeText(BrowseByItem.this, "Item with id [" + id + "] - Position [" + position + "] - Planet [" + clickedView.getText() + "]", Toast.LENGTH_SHORT).show();
+                    FoodItem selectedFood = (FoodItem) listView.getItemAtPosition(position);
+
+                    Intent intention = new Intent(BrowseByItem.this, InstructionsActivity.class);
+
+                    Bundle foodItemBundle = new Bundle();
+                    foodItemBundle.putString("Food_Type", selectedFood.getFoodType());
+                    foodItemBundle.putString("Brand_Name", selectedFood.getBrandName());
+                    foodItemBundle.putBoolean("Frozen", selectedFood.getFrozen());
+                    foodItemBundle.putString("Instructions", selectedFood.getInstructions());
+
+                    intention.putExtra("FoodItemBundle", foodItemBundle);
+
+                    startActivity(intention);
                 }
             });
         }

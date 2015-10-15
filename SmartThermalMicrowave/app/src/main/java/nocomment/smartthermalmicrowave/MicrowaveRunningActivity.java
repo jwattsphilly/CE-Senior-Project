@@ -33,7 +33,7 @@ public class MicrowaveRunningActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
 
-        // TODO: Test this
+        // TODO: Test all of this
         Intent infoIntent = getIntent();
         String fullCodedInstructionString = infoIntent.getStringExtra("Coded Instruction");
         instructionList = LocalDatabase.splitInstructions(fullCodedInstructionString);
@@ -44,7 +44,8 @@ public class MicrowaveRunningActivity extends Activity {
         timeOfNextStir = getTimeOfNextStir(instructionList, indexOfInstruction);
 
         counterText = new TextView(this);
-        counterText.setText(secondsToString(totalTimeSeconds));
+        counterText.setText(LocalDatabase.secondsToString(totalTimeSeconds));
+        counterText.setTextSize(30);
 
         stirText = new TextView(this);
         stirText.setText(" ");
@@ -61,6 +62,7 @@ public class MicrowaveRunningActivity extends Activity {
                             counter.cancel();
                             stirText.setText(" ");
                             stopStartButton.setText("Start");
+                            isRunning = false;
                         }
                         else                        // Start timer
                         {
@@ -70,6 +72,7 @@ public class MicrowaveRunningActivity extends Activity {
 
                             stirText.setText(" ");
                             stopStartButton.setText("Stop");
+                            isRunning = true;
                         }
                     }
                 }
@@ -87,17 +90,7 @@ public class MicrowaveRunningActivity extends Activity {
         rootLayout.addView(stopStartButton,
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
 
-    }
-
-    public String secondsToString(int time)
-    {
-        int minutes = time / 60;
-        int seconds = time % 60;
-
-        String minutesString = (minutes > 9)? ""+minutes: "0"+minutes;
-        String secondsString = (seconds > 9)? ""+seconds: "0"+seconds;
-
-        return minutesString + ":" + secondsString;
+        setContentView(rootLayout);
     }
 
     private void startCounter(final int timeLeft)
@@ -108,7 +101,7 @@ public class MicrowaveRunningActivity extends Activity {
             public void onTick(long millisUntilFinished) {
 
                 secondsUntilFinished = (int) (millisUntilFinished / 1000);
-                counterText.setText(secondsToString(secondsUntilFinished));
+                counterText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
 
                 // Check if we're at a stir point, if so, "pause" the timer until start button pressed
                 if(timeOfNextStir !=0 && secondsUntilFinished<=timeOfNextStir)
@@ -117,14 +110,18 @@ public class MicrowaveRunningActivity extends Activity {
                     stirText.setText("Stir Please");    // "Go STIR Crazy!"
                     indexOfInstruction++;               // Update the "current" instruction and time of next stir
                     timeOfNextStir = getTimeOfNextStir(instructionList, indexOfInstruction);
+                    stopStartButton.setText("Start");
+                    isRunning = false;
                 }
             }
 
             @Override
             public void onFinish() {
                 secondsUntilFinished = 0;
+                counterText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
                 // YAY!  We finished!
-                // TODO: Start EnjoyActivity
+                Intent enjoyIntent = new Intent(MicrowaveRunningActivity.this, EnjoyActivity.class);
+                startActivity(enjoyIntent);
             }
         };
 
@@ -135,7 +132,7 @@ public class MicrowaveRunningActivity extends Activity {
     {
         int time = 0;
 
-        for(int index=currentInstructionIndex; index<instructionList.size(); index++)
+        for(int index=currentInstructionIndex+1; index<instructionList.size(); index++)
         {
             time += LocalDatabase.getTotalSeconds(instructionList.get(index));
         }
