@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:2:1-24:12
+ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:2:1-32:12
 	xmlns:android
 		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:2:11-69
 	package
@@ -24,24 +24,24 @@ ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer
 		INJECTED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml
 application
-ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:11:5-22:19
+ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:11:5-30:19
 	android:label
 		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:13:9-41
 	android:icon
 		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:12:9-45
-activity#ch.serverbox.android.usbcontroller.UsbControllerActivity
-ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:14:9-21:20
+activity#ch.serverbox.android.usbcontroller.ThermalMicrowaveUsbActivity
+ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:22:9-29:20
 	android:label
-		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:15:13-45
+		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:23:13-45
 	android:name
-		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:16:13-50
+		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:24:13-56
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:17:13-20:29
+ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:25:13-28:29
 action#android.intent.action.MAIN
-ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:18:17-69
+ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:26:17-69
 	android:name
-		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:18:25-66
+		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:26:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:19:17-77
+ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:19:27-74
+		ADDED from /Users/Darin/Documents/School/U of U/Senior Project/Usb Data Transfer/UsbController/app/src/main/AndroidManifest.xml:27:27-74

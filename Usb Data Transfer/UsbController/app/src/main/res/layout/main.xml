@@ -1,23 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+<FrameLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <SeekBar
-        android:id="@+id/seekBar1"
-        android:layout_width="match_parent"
+
+    <EditText
+        android:layout_width="131dp"
         android:layout_height="wrap_content"
-        android:max="255"
-        android:progress="0"
-        android:padding="40dp"
-        />
+        android:id="@+id/payload_val_input"
+        android:layout_gravity="center_horizontal|top"
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enumerate" 
-        android:layout_gravity="center_horizontal"/>
+        android:text="Update"
+        android:id="@+id/btn_update"
+        android:layout_gravity="left|top" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Text"
+            android:textSize="30dp"
+            android:id="@+id/payload_val_text"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payload_val_text"
+            android:width="300dp"
+            android:height="300dp"
+            android:text="PUSH TO SEND"
+            android:textSize="30dp"
+            android:id="@+id/btn_send"/>
+    </RelativeLayout>
+</FrameLayout>

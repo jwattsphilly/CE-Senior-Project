@@ -14,8 +14,11 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int button1=0x7f050001;
-        public static final int seekBar1=0x7f050000;
+        public static final int btn_send=0x7f050004;
+        public static final int btn_update=0x7f050002;
+        public static final int container=0x7f050000;
+        public static final int payload_val_input=0x7f050001;
+        public static final int payload_val_text=0x7f050003;
     }
     public static final class layout {
         public static final int main=0x7f030000;
