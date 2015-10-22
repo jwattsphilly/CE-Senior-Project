@@ -68,6 +68,7 @@ public class MicrowaveRunningActivity extends Activity {
                         if(isRunning)               // Stop timer
                         {
                             // TODO: Send the "S" (Pause) instruction to the Arduino
+                            UsbSingleton.sendDataUSB("S");
                             counter.cancel();
                             stirText.setText(" ");
                             stopStartButton.setText("Start");
@@ -77,6 +78,11 @@ public class MicrowaveRunningActivity extends Activity {
                         {
                             String currentInstruction = instructionList.get(indexOfInstruction);
                             // TODO: Send the instruction to the Arduino
+                            UsbSingleton.sendDataUSB(currentInstruction);
+
+                            // TODO: Send "s" (start) if we're just paused
+                            // TODO: Send instruction portion if we're at the beginning or during a stir
+
                             startCounter(secondsUntilFinished);
 
                             stirText.setText(" ");

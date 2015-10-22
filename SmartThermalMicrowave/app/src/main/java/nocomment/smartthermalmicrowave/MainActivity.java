@@ -1,6 +1,7 @@
 package nocomment.smartthermalmicrowave;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,8 @@ public class MainActivity extends ActionBarActivity {
         databaseThread.start();
 
         while(LocalDatabase.foodList.isEmpty()){}   //TODO This is a bad plan...
+
+        UsbSingleton.initUSB(this);
 
         setContentView(R.layout.activity_main);
     }
