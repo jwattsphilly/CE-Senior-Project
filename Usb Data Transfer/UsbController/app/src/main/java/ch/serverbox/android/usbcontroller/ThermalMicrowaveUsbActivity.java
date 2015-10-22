@@ -2,6 +2,8 @@ package ch.serverbox.android.usbcontroller;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,12 +23,14 @@ public class ThermalMicrowaveUsbActivity extends Activity {
     private TextView payloadDataText;
     private Button btnUpdate;
     private Button btnDataSend;
-    static int payloadByte = 0x7c;
+    static String payloadByte = "t78f";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
         if(sUsbController == null){
             sUsbController = new UsbController(this, mConnectionHandler, VID, PID);
         }
@@ -34,7 +38,7 @@ public class ThermalMicrowaveUsbActivity extends Activity {
         payloadDataInput = (EditText) findViewById(R.id.payload_val_input);
 
         payloadDataText = (TextView)findViewById(R.id.payload_val_text);
-        payloadDataText.setText(Integer.toString(payloadByte));
+        payloadDataText.setText(payloadByte);
 
         btnUpdate = (Button) findViewById(R.id.btn_update);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +49,7 @@ public class ThermalMicrowaveUsbActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
                 String input = payloadDataInput.getText().toString();
                 if(!input.equals("")) {
-                    payloadByte = Integer.parseInt(input);
+                    payloadByte = input.toString();
                     payloadDataText.setText(input);
                 }
             }
@@ -60,7 +64,12 @@ public class ThermalMicrowaveUsbActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
 
                 if(sUsbController != null){
-                    sUsbController.send((byte)(payloadByte&0xFF));
+                    for(int i=0; i<payloadByte.length(); i++)
+                    {
+                        final char substring = payloadByte.charAt(i);
+                        SystemClock.sleep(5);   //Give the arduino time to process
+                        sUsbController.send((byte) (substring & 0xFF));
+                    }
                 }
             }
         });
