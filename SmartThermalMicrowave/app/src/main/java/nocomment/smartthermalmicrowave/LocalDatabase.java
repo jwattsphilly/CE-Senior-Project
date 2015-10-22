@@ -29,8 +29,8 @@ public class LocalDatabase {
             DriverManager.setLoginTimeout(10);
             conn = DriverManager.getConnection("jdbc:h2:tcp://nocomment.sipnswirlutah.com:9092/~/NoComment", "sa", "");
 
+            // Obtain all of the contents from the Food table
             PreparedStatement query = conn.prepareStatement("SELECT * FROM FOOD;");
-
             ResultSet results = query.executeQuery();
 
             while(results.next())
@@ -50,12 +50,12 @@ public class LocalDatabase {
         catch(Exception ex)
         {
             Log.e("LocalDatabase","Uh, oh!  Something bad happened:");
-            Log.e("", ex.getMessage());
+            Log.e("LocalDatabase", ex.getMessage());
         }
         finally
         {
             if(conn != null)
-                conn.close();
+                conn.close();   // Close the connection to the database
         }
     }
 
@@ -179,7 +179,7 @@ public class LocalDatabase {
             returnList.add(restOfString.substring(0, stirIndex));
             // Get the rest of the instruction
             restOfString = restOfString.substring(stirIndex+1);
-            // Check to see if there're anymore stir instructions
+            // Check to see if there are anymore stir instructions
             stirIndex = restOfString.indexOf('r');
         }
 
@@ -226,8 +226,8 @@ public class LocalDatabase {
         int minutes = time / 60;
         int seconds = time % 60;
 
-        String minutesString = (minutes > 9)? ""+minutes: "0"+minutes;
-        String secondsString = (seconds > 9)? ""+seconds: "0"+seconds;
+        String minutesString = (minutes > 9) ? ""+minutes : "0"+minutes;
+        String secondsString = (seconds > 9) ? ""+seconds : "0"+seconds;
 
         return minutesString + ":" + secondsString;
     }

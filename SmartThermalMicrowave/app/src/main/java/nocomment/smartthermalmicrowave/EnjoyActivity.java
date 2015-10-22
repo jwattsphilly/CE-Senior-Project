@@ -1,6 +1,7 @@
 package nocomment.smartthermalmicrowave;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Gravity;
@@ -17,17 +18,21 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
 
     private TextView enjoyView = null;
     private boolean counterIsRunning = false;
+    private boolean isMicrowavable = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        // TODO: Test all of this
+        // TODO: Make everything visually appealing
+
+        Intent intent = getIntent();
+        isMicrowavable = intent.getBooleanExtra("Microwavable",true);
 
         enjoyView = new TextView(this);
         enjoyView.setText("Enjoy!");
-        enjoyView.setTextSize(30);
+        enjoyView.setTextSize(75);
 
         Button add30Button = new Button(this);
         add30Button.setText("+30 seconds?");
@@ -53,30 +58,34 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        if(!counterIsRunning) {
-            CountDownTimer counter = new CountDownTimer(30000, 1000) {
+        if(isMicrowavable) {
+            if (!counterIsRunning) {
+                CountDownTimer counter = new CountDownTimer(30000, 1000) {
 
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    int secondsUntilFinished = (int) (millisUntilFinished / 1000);
-                    enjoyView.setText(LocalDatabase.secondsToString(secondsUntilFinished));
-                }
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        int secondsUntilFinished = (int) (millisUntilFinished / 1000);
+                        enjoyView.setText(LocalDatabase.secondsToString(secondsUntilFinished));
+                    }
 
-                @Override
-                public void onFinish() {
-                    enjoyView.setText("Enjoy!");
-                    counterIsRunning = false;
-                }
-            };
+                    @Override
+                    public void onFinish() {
+                        enjoyView.setText("Enjoy!");
+                        counterIsRunning = false;
+                    }
+                };
 
-            // TODO: Send message "t30s" to Arduino
-            counter.start();
-            counterIsRunning = true;
+                // TODO: Send message "t30s" to Arduino
+                counter.start();
+                counterIsRunning = true;
+            } else {
+                // TODO: Perhaps have STOP/PAUSE capabilities?
+                // TODO: OR keep adding 30 more seconds
+            }
         }
         else
         {
-            // TODO: Perhaps have STOP/PAUSE capabilities?
-            // TODO: OR keep adding 30 more seconds
+            enjoyView.setText("Nice try, but that's not going to work!");
         }
     }
 }

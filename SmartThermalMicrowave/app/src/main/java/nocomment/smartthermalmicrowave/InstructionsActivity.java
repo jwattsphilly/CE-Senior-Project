@@ -14,15 +14,18 @@ import android.widget.TextView;
  */
 public class InstructionsActivity extends Activity {
 
+    // TODO: Make everything visually appealing
+
+    public static final int RUN_MICROWAVE_REQUEST = 4;
+    public static final int MICROWAVE_FINISHED_RESULT = 42;
     private Button selectButton = null;
     private TextView foodInfoView = null;
     private TextView instructionView = null;
+    private boolean isMicrowavable = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // TODO: Test all of this!
 
         Intent intent = getIntent();
         Bundle foodItemBundle = intent.getBundleExtra("FoodItemBundle");
@@ -31,6 +34,8 @@ public class InstructionsActivity extends Activity {
         String brandName = foodItemBundle.getString("Brand_Name");
         boolean frozen = foodItemBundle.getBoolean("Frozen");
         String frozenString = frozen ? " (Frozen)": " (Not frozen)";
+
+        isMicrowavable = (!foodType.equals("Fork"));
 
         final String codedInstructionString = foodItemBundle.getString("Instructions");
 
@@ -48,9 +53,9 @@ public class InstructionsActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         // Start a new MicrowaveRunningActivity
-                        Intent sendIntent = new Intent(InstructionsActivity.this, MicrowaveRunningActivity.class);
-                        sendIntent.putExtra("Coded Instruction", codedInstructionString);
-                        startActivity(sendIntent);
+                        Intent microwaveRunningIntent = new Intent(InstructionsActivity.this, MicrowaveRunningActivity.class);
+                        microwaveRunningIntent.putExtra("Coded Instruction", codedInstructionString);
+                        startActivityForResult(microwaveRunningIntent, RUN_MICROWAVE_REQUEST);
                     }
                 }
         );
@@ -69,4 +74,21 @@ public class InstructionsActivity extends Activity {
 
         setContentView(rootLayout);
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Once the MicrowaveRunningActivity timer is closed due to the timer hitting zero, start the EnjoyActivity
+        // This code is only run when the timer gets to zero and not just when "back" is pressed
+        if (requestCode == RUN_MICROWAVE_REQUEST && resultCode == MICROWAVE_FINISHED_RESULT) {
+            Intent enjoyIntent = new Intent(this, EnjoyActivity.class);
+            enjoyIntent.putExtra("Microwavable", isMicrowavable);
+            startActivity(enjoyIntent);
+        }
+    }
+
+
 }

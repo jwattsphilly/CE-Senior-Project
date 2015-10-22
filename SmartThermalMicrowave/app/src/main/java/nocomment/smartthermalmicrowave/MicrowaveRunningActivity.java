@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
  * Created by James Watts on 10/13/15.
  */
 public class MicrowaveRunningActivity extends Activity {
+
+    // TODO: Make everything visually appealing
 
     private int secondsUntilFinished = 0;
     private int timeOfNextStir = 0;
@@ -33,7 +36,6 @@ public class MicrowaveRunningActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
 
-        // TODO: Test all of this
         Intent infoIntent = getIntent();
         String fullCodedInstructionString = infoIntent.getStringExtra("Coded Instruction");
         instructionList = LocalDatabase.splitInstructions(fullCodedInstructionString);
@@ -45,10 +47,17 @@ public class MicrowaveRunningActivity extends Activity {
 
         counterText = new TextView(this);
         counterText.setText(LocalDatabase.secondsToString(totalTimeSeconds));
-        counterText.setTextSize(30);
+        counterText.setTextSize(75);
+        LinearLayout.LayoutParams counterTextParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2);
+        counterTextParams.gravity = Gravity.CENTER_HORIZONTAL;
 
         stirText = new TextView(this);
         stirText.setText(" ");
+        stirText.setTextSize(50);
+        LinearLayout.LayoutParams stirTextParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2);
+        stirTextParams.gravity = Gravity.CENTER_HORIZONTAL;
 
         stopStartButton = new Button(this);
         stopStartButton.setText("Start");
@@ -81,11 +90,9 @@ public class MicrowaveRunningActivity extends Activity {
         LinearLayout rootLayout = new LinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
 
-        rootLayout.addView(counterText,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 2));
+        rootLayout.addView(counterText, counterTextParams);
 
-        rootLayout.addView(stirText,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 2));
+        rootLayout.addView(stirText, stirTextParams);
 
         rootLayout.addView(stopStartButton,
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
@@ -120,8 +127,8 @@ public class MicrowaveRunningActivity extends Activity {
                 secondsUntilFinished = 0;
                 counterText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
                 // YAY!  We finished!
-                Intent enjoyIntent = new Intent(MicrowaveRunningActivity.this, EnjoyActivity.class);
-                startActivity(enjoyIntent);
+                setResult(InstructionsActivity.MICROWAVE_FINISHED_RESULT);
+                finish();
             }
         };
 

@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
 
             if(LocalDatabase.foodList.isEmpty())
                 Log.w(getLocalClassName(), "No data returned from remote database. Dang.");
-            Log.w(getLocalClassName(), "Updated the food list");
+            Log.i(getLocalClassName(), "Updated the food list");
         }
     });
 
