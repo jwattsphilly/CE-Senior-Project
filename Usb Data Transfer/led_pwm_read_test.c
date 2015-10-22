@@ -76,34 +76,36 @@ uint8_t uart_putc(unsigned char data) {
 	return 0;
 }
 
-
+/* sets up which pins to be input / output. */
 void initIO(void) {
 	DDRD |= (1 << DDD3);
 	DDRB = 0xff; //all out
 }
 
-volatile uint8_t data = 10;
-volatile uint8_t pause;
-uint8_t i = 0;
 
-void setup()
-{
+volatile uint8_t data = 10;
+
+int main(void) {
 	initIO();
 	uart_init();
 	sei();
+
+	uint8_t i = 0;
+	volatile uint8_t pause;
+	pause = Serial.read();
+	for(;;) {
+		//pause = data;
+		PORTB |= (1 << LED);
+		for(i = 0; i < pause; i++)
+			_delay_us(10);
+		PORTB &= ~(1 << LED);
+		for(i = 0; i < 255-pause; i++)
+			_delay_us(10);
+	}
+	return 0; // never reached
 }
 
+/*
 ISR(USART_RX_vect) {//attention to the name and argument here, won't work otherwise
-	data = UDR0;//UDR0 needs to be read
-}
-
-void loop()
-{
-	pause = data;
-	PORTB |= (1 << LED);
-	for(i = 0; i < pause; i++)
-		_delay_us(10);
-	PORTB &= ~(1 << LED);
-	for(i = 0; i < 255-pause; i++)
-		_delay_us(10);
-}
+	//data = UDR0;//UDR0 needs to be read
+}*/

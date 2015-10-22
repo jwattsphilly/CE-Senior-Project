@@ -50,60 +50,61 @@
 #endif
 
 void uart_init(void) {
-	UBRR0H = UBRR_VAL >> 8;
-	UBRR0L = UBRR_VAL & 0xFF;
+  UBRR0H = UBRR_VAL >> 8;
+  UBRR0L = UBRR_VAL & 0xFF;
 
-	UCSR0C = (0 << UMSEL01) | (0 << UMSEL00) | (1 << UCSZ01) | (1 << UCSZ00); // asynchron 8N1
-	UCSR0B |= (1 << RXEN0); // enable UART RX
-	UCSR0B |= (1 << TXEN0); // enable UART TX
-	UCSR0B |= (1 << RXCIE0); //interrupt enable
+  UCSR0C = (0 << UMSEL01) | (0 << UMSEL00) | (1 << UCSZ01) | (1 << UCSZ00); // asynchron 8N1
+  UCSR0B |= (1 << RXEN0); // enable UART RX
+  UCSR0B |= (1 << TXEN0); // enable UART TX
+  UCSR0B |= (1 << RXCIE0); //interrupt enable
 }
 
 /* Receive symbol, not necessary for this example, using interrupt instead*/
 uint8_t uart_getc(void) {
-	while (!(UCSR0A & (1 << RXC0)))
-		// wait until symbol is ready
-		;
-	return UDR0; // return symbol
+  while (!(UCSR0A & (1 << RXC0)))
+    // wait until symbol is ready
+    ;
+  return UDR0; // return symbol
 }
 
 uint8_t uart_putc(unsigned char data) {
-	/* Wait for empty transmit buffer */
-	while (!(UCSR0A & (1 << UDRE0)))
-		;
-	/* Put data into buffer, sends the data */
-	UDR0 = data;
-	return 0;
+  /* Wait for empty transmit buffer */
+  while (!(UCSR0A & (1 << UDRE0)))
+    ;
+  /* Put data into buffer, sends the data */
+  UDR0 = data;
+  return 0;
 }
 
 
 void initIO(void) {
-	DDRD |= (1 << DDD3);
-	DDRB = 0xff; //all out
+  DDRD |= (1 << DDD3);
+  DDRB = 0xff; //all out
 }
 
-volatile uint8_t data = 10;
-volatile uint8_t pause;
-uint8_t i = 0;
 
-void setup()
-{
-	initIO();
-	uart_init();
-	sei();
+volatile uint8_t data = 10;
+
+int main(void) {
+  initIO();
+  uart_init();
+  sei();
+
+  uint8_t i = 0;
+  volatile uint8_t pause;
+  for(;;) {
+    pause = data;
+    PORTB |= (1 << LED);
+    for(i = 0; i < pause; i++)
+      _delay_us(10);
+    PORTB &= ~(1 << LED);
+    for(i = 0; i < 255-pause; i++)
+      _delay_us(10);
+  }
+  return 0; // never reached
 }
 
 ISR(USART_RX_vect) {//attention to the name and argument here, won't work otherwise
-	data = UDR0;//UDR0 needs to be read
+  data = UDR0;//UDR0 needs to be read
 }
 
-void loop()
-{
-	pause = data;
-	PORTB |= (1 << LED);
-	for(i = 0; i < pause; i++)
-		_delay_us(10);
-	PORTB &= ~(1 << LED);
-	for(i = 0; i < 255-pause; i++)
-		_delay_us(10);
-}
