@@ -1,16 +1,7 @@
 package nocomment.smartthermalmicrowave;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.usb.UsbConstants;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbDeviceConnection;
-import android.hardware.usb.UsbEndpoint;
-import android.hardware.usb.UsbInterface;
-import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
@@ -22,13 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Darin on 7/25/15.
  */
-public class BrowseByItem extends ActionBarActivity {
+public class BrowseByItem extends Activity {
 //    private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
 //    UsbEndpoint input, output;
 

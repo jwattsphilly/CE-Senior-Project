@@ -1,5 +1,6 @@
 package nocomment.smartthermalmicrowave;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,7 +16,7 @@ import com.google.zxing.integration.android.IntentResult;
 /**
  * Created by Darin on 7/25/15.
  */
-public class ScanUPC extends ActionBarActivity implements View.OnClickListener {
+public class ScanUPC extends Activity implements View.OnClickListener {
     public final static String UPC_SEARCH_STRING = "nocomment.smartthermalmicrowave.EXTRA_UPC_SEARCH_STRING";
 
     private Button scanBtn;

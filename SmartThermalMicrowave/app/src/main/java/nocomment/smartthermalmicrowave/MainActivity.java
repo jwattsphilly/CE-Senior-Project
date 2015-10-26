@@ -1,5 +1,6 @@
 package nocomment.smartthermalmicrowave;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
@@ -11,7 +12,7 @@ import android.view.View;
 
 import java.sql.SQLException;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     public final static String EXTRA_MESSAGE = "nocomment.smartthermalmicrowave.MESSAGE";
 
     //TODO Change the priority on this thread so that it doesn't interfere with other important processes

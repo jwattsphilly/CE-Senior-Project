@@ -1,5 +1,6 @@
 package nocomment.smartthermalmicrowave;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 /**
  * Created by Darin on 7/25/15.
  */
-public class SearchByName extends ActionBarActivity {
+public class SearchByName extends Activity {
     public final static String SEARCH_STRING = "nocomment.smartthermalmicrowave.EXTRA_SEARCH_STRING";
 
     @Override

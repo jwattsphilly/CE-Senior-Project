@@ -1,5 +1,6 @@
 package nocomment.smartthermalmicrowave;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by Darin on 9/16/15.
  */
-public class DisplaySearchResultsSBN extends ActionBarActivity {
+public class DisplaySearchResultsSBN extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

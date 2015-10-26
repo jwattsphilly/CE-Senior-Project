@@ -1,8 +1,8 @@
 package nocomment.smartthermalmicrowave;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Darin on 9/23/15.
  */
-public class DisplaySearchResultsUPC extends ActionBarActivity {
+public class DisplaySearchResultsUPC extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
