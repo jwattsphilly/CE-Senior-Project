@@ -42,3 +42,5 @@ Sept 27th - Oct 3rd: Got a hold of the code for an audio decoder to send message
 
 Oct 11th - 17th: Transferring data over the audio port has proven to be buggy and unreliable, but we did find a very promising method using the USB; so we started looking into that.  The app is coming along very well and all of the app’s Activities have been created and seem to be fully functional (apart from the communication with the Arduino).
 
+Oct 18th - 24th: Finished basic functionality of Android application including timers, activity flow, etc. Looked further into the USB communication and found it promising. Arduino code for the communication seeemed overly complicated (interrupts, etc), but upon testing we discovered it is required. Integrated USB communication Arduino code with our microwave control Arduino code. Using the given library necessitated getting rid of all standard Arduino serial communication. It works well! Used a tester app on the tablet to send characters and strings and they functioned! Integrated changes into Android app and tested. Success! There are small timing issues, but we have already come up with a possible solution for resolving them. 
+
