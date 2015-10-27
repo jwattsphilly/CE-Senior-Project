@@ -147,6 +147,13 @@
                 android:checked="false"
                 android:onClick="pressButton" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temp Toggle"
+                android:id="@+id/tempToggle"
+                android:onClick="pressButton" />
+
         </LinearLayout>
     </LinearLayout>
 

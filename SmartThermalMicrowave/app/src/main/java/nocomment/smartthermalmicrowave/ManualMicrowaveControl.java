@@ -57,6 +57,9 @@ public class ManualMicrowaveControl extends Activity
             case R.id.buttonStop:
                 UsbSingleton.sendDataUSB("S");
                 break;
+            case R.id.tempToggle:
+                UsbSingleton.sendDataUSB("m");
+                break;
             default:
                 break;
         }
