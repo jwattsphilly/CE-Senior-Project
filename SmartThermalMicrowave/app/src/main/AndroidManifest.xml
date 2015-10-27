@@ -44,6 +44,14 @@
                 android:value="nocomment.smartthermalmicrowave.MainActivity" />
         </activity>
         <activity
+            android:name=".ManualMicrowaveControl"
+            android:label="@string/activity_manual_control"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nocomment.smartthermalmicrowave.MainActivity" />
+        </activity>
+        <activity
             android:name=".DisplaySearchResultsSBN"
             android:label="@string/search_results"
             android:parentActivityName="nocomment.smartthermalmicrowave.SearchByName" >

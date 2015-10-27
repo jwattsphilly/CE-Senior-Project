@@ -57,6 +57,20 @@
             android:text="@string/button_scan_upc"
             android:onClick="scanUPC" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manual Microwave Control Panel"
+            android:id="@+id/button"
+            android:onClick="manualControl" />
+    </LinearLayout>
 </RelativeLayout>
 
 
