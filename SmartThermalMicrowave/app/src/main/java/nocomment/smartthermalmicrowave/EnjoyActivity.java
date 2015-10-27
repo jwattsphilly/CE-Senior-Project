@@ -75,8 +75,8 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
                     }
                 };
 
-                // TODO: Send message "t30s" to Arduino
-                UsbSingleton.sendDataUSB("t30s");
+                // TODO: Send message "s" to Arduino
+                UsbSingleton.sendDataUSB("s");
                 counter.start();
                 counterIsRunning = true;
             } else {
