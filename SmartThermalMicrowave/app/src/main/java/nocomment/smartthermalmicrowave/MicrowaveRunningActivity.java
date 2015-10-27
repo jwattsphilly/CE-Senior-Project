@@ -67,8 +67,9 @@ public class MicrowaveRunningActivity extends Activity {
                     public void onClick(View v) {
                         if(isRunning)               // Stop timer
                         {
-                            // TODO: Send the "S" (Pause) instruction to the Arduino
+                            // Send the "S" (Pause) instruction to the Arduino
                             UsbSingleton.sendDataUSB("S");
+                            // Stop our timer
                             counter.cancel();
                             stirText.setText(" ");
                             stopStartButton.setText("Start");
@@ -76,13 +77,9 @@ public class MicrowaveRunningActivity extends Activity {
                         }
                         else                        // Start timer
                         {
-                            String currentInstruction = instructionList.get(indexOfInstruction);
-                            // TODO: Send the instruction to the Arduino
-                            UsbSingleton.sendDataUSB(currentInstruction);
-
-                            // TODO: Send "s" (start) if we're just paused
-                            // TODO: Send instruction portion if we're at the beginning or during a stir
-
+                            // Send "s" (start) instruction to the Arduino
+                            UsbSingleton.sendDataUSB("s");
+                            // Start our counter
                             startCounter(secondsUntilFinished);
 
                             stirText.setText(" ");
@@ -102,6 +99,9 @@ public class MicrowaveRunningActivity extends Activity {
 
         rootLayout.addView(stopStartButton,
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
+
+        // Send the first part of the instruction to the Arduino
+        UsbSingleton.sendDataUSB(instructionList.get(indexOfInstruction));
 
         setContentView(rootLayout);
     }
@@ -125,6 +125,8 @@ public class MicrowaveRunningActivity extends Activity {
                     timeOfNextStir = getTimeOfNextStir(instructionList, indexOfInstruction);
                     stopStartButton.setText("Start");
                     isRunning = false;
+                    // Send instruction portion
+                    UsbSingleton.sendDataUSB(instructionList.get(indexOfInstruction));
                 }
             }
 

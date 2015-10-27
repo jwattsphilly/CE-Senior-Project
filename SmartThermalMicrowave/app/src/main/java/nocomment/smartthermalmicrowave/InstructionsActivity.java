@@ -17,6 +17,7 @@ public class InstructionsActivity extends Activity {
     // TODO: Make everything visually appealing
 
     public static final int RUN_MICROWAVE_REQUEST = 4;
+    public static final int RUN_ENJOY_REQUEST = 5;
     public static final int MICROWAVE_FINISHED_RESULT = 42;
     private Button selectButton = null;
     private TextView foodInfoView = null;
@@ -81,12 +82,14 @@ public class InstructionsActivity extends Activity {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
+        UsbSingleton.sendDataUSB("SS");// Double click the STOP button to cancel out of anything
+
         // Once the MicrowaveRunningActivity timer is closed due to the timer hitting zero, start the EnjoyActivity
         // This code is only run when the timer gets to zero and not just when "back" is pressed
         if (requestCode == RUN_MICROWAVE_REQUEST && resultCode == MICROWAVE_FINISHED_RESULT) {
             Intent enjoyIntent = new Intent(this, EnjoyActivity.class);
             enjoyIntent.putExtra("Microwavable", isMicrowavable);
-            startActivity(enjoyIntent);
+            startActivityForResult(enjoyIntent, RUN_ENJOY_REQUEST);
         }
     }
 
