@@ -83,9 +83,17 @@ public class MainActivity extends Activity {
     }
 
     //Activity setup for Search By Name
-    public void searchByName(View view){
+    public void searchByName(View view) {
         Intent intent = new Intent(this, SearchByName.class);
         String message = "Search By Name Button Pressed";
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    //Activity setup for Manual Control
+    public void manualControl(View view){
+        Intent intent = new Intent(this, ManualMicrowaveControl.class);
+        String message = "Manual Microwave Control Button Pressed";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
