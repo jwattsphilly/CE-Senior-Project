@@ -1,4 +1,4 @@
-Stuart Johnsen, Darin Stoker, James Watts
+﻿Stuart Johnsen, Darin Stoker, James Watts
 Computer Engineering Senior Project, Fall 2015
 Heat Map Technology for a Microwave Oven
  
@@ -44,3 +44,4 @@ Oct 11th - 17th: Transferring data over the audio port has proven to be buggy an
 
 Oct 18th - 24th: Finished basic functionality of Android application including timers, activity flow, etc. Looked further into the USB communication and found it promising. Arduino code for the communication seeemed overly complicated (interrupts, etc), but upon testing we discovered it is required. Integrated USB communication Arduino code with our microwave control Arduino code. Using the given library necessitated getting rid of all standard Arduino serial communication. It works well! Used a tester app on the tablet to send characters and strings and they functioned! Integrated changes into Android app and tested. Success! There are small timing issues, but we have already come up with a possible solution for resolving them. 
 
+Oct 24th - 31st: Met with Ken about where we were with our project, set up a code / design review in two weeks.  Added motor control to our application.  Verified that our implementation would be safe for motor startup and control, spliced in wires from the motor into the relay board.  Added functionality to the Android and Arduino code to control the motor appropriately, allowing us to stop the motor at any time during cooking.  Started planning our code review.
