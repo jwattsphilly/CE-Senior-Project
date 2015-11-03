@@ -17,7 +17,7 @@
 #define btnPower A0      // Connected to relay 12
 #define btnStart A1      // Connected to relay 13
 #define btnStop A2       // Connected to relay 14
-#define btnX A3          // Connected to relay 15
+#define btnPlate A3      // Connected to relay 15
 #define btnY A4          // Connected to relay 16
 // Note: pin A5 is purple wire, not currently used
 // Note: pin 0 is red wire, not currently used
@@ -103,6 +103,7 @@ int lastPushedButton = -1;
 char serialCommand, serialParams;
 int cookTimeRemaining = 0;
 long stopTimeMillis = 0;
+boolean plateIsTurning = true;
 
 void setup() {
   pinMode(btn0, OUTPUT);          digitalWrite(btn0, HIGH);
@@ -119,7 +120,7 @@ void setup() {
   pinMode(btnPower, OUTPUT);      digitalWrite(btnPower, HIGH);
   pinMode(btnStart, OUTPUT);      digitalWrite(btnStart, HIGH);
   pinMode(btnStop, OUTPUT);       digitalWrite(btnStop, HIGH);
-  pinMode(btnX, OUTPUT);          digitalWrite(btnX, HIGH);
+  pinMode(btnPlate, OUTPUT);      digitalWrite(btnPlate, HIGH);
   pinMode(btnY, OUTPUT);          digitalWrite(btnY, HIGH);
   
   for(; i < maxUSBMessageLength; i++)
@@ -242,6 +243,20 @@ void loop() {
         // Stop
         case 'S':
           pushButton(btnStop);
+          break;
+
+        // Plate Toggle
+        case 'm':
+          if(plateIsTurning)
+          {
+            plateIsTurning = false;
+            digitalWrite(btnPlate, LOW);
+          }
+          else
+          {
+            plateIsTurning = true;
+            digitalWrite(btnPlate, HIGH);
+          }
           break;
       }
     }
