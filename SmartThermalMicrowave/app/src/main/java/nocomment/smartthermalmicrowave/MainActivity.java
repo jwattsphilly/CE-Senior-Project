@@ -14,6 +14,7 @@ import java.sql.SQLException;
 
 public class MainActivity extends Activity {
     public final static String EXTRA_MESSAGE = "nocomment.smartthermalmicrowave.MESSAGE";
+    public final static String SEARCH_STRING = "nocomment.smartthermalmicrowave.EXTRA_SEARCH_STRING";
 
     //TODO Change the priority on this thread so that it doesn't interfere with other important processes
     Thread databaseThread = new Thread(new Runnable() {
@@ -64,14 +65,6 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    //Activity setup for Browse by Item
-    public void browseByItem(View view){
-        Intent intent = new Intent(this, BrowseByItem.class);
-        String message = "Browse By Item Button Pressed";
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
     }
 
     //Activity setup for Scan UPC

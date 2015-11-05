@@ -22,6 +22,8 @@ public class BrowseByItem extends Activity {
 //    private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
 //    UsbEndpoint input, output;
 
+    // TODO: Get rid of this class entirely!
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

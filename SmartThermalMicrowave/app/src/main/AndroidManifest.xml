@@ -20,14 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BrowseByItem"
-            android:label="@string/title_activity_browse"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nocomment.smartthermalmicrowave.MainActivity" />
-        </activity>
-        <activity
             android:name=".SearchByName"
             android:label="@string/title_activity_search"
             android:parentActivityName=".MainActivity" >
@@ -52,7 +44,7 @@
                 android:value="nocomment.smartthermalmicrowave.MainActivity" />
         </activity>
         <activity
-            android:name=".DisplaySearchResultsSBN"
+            android:name=".DisplaySearchResults"
             android:label="@string/search_results"
             android:parentActivityName="nocomment.smartthermalmicrowave.SearchByName" >
             <meta-data
@@ -60,20 +52,12 @@
                 android:value="nocomment.smartthermalmicrowave.SearchByName" />
         </activity>
         <activity
-            android:name=".DisplaySearchResultsUPC"
-            android:label="@string/search_results"
-            android:parentActivityName="nocomment.smartthermalmicrowave.ScanUPC" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nocomment.smartthermalmicrowave.ScanUPC" />
-        </activity>
-        <activity
             android:name=".InstructionsActivity"
             android:label="@string/title_activity_instructions"
-            android:parentActivityName="nocomment.smartthermalmicrowave.DisplaySearchResultsSBN" >
+            android:parentActivityName=".DisplaySearchResults" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="nocomment.smartthermalmicrowave.DisplaySearchResultsSBN" />
+                android:value=".DisplaySearchResults" />
         </activity>
         <activity
             android:name=".MicrowaveRunningActivity"

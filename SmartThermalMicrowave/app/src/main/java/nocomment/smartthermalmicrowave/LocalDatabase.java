@@ -60,6 +60,7 @@ public class LocalDatabase {
     }
 
     public static List<FoodItem> getMatches(String foodName){
+        // TODO: split space-delimited Strings and search all of said Strings (AND, not OR)
         List<FoodItem> returnList = new ArrayList<FoodItem>();
         for (FoodItem item:foodList) {
             if(item.getFoodType().toLowerCase().contains(foodName.toLowerCase()) ||

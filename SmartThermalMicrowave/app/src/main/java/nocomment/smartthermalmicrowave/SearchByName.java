@@ -3,19 +3,14 @@ package nocomment.smartthermalmicrowave;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
-import java.sql.SQLException;
 
 /**
  * Created by Darin on 7/25/15.
  */
 public class SearchByName extends Activity {
-    public final static String SEARCH_STRING = "nocomment.smartthermalmicrowave.EXTRA_SEARCH_STRING";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +33,14 @@ public class SearchByName extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    // TODO: Launch newly renamed (and merged) SearchResults Activity
     public void executeSearch(View view)
     {
-        Intent intent = new Intent(this, DisplaySearchResultsSBN.class);
+        Intent intent = new Intent(this, DisplaySearchResults.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
-        intent.putExtra(SEARCH_STRING, message);
+        intent.putExtra(MainActivity.SEARCH_STRING, message);
+
         startActivity(intent);
     }
 }

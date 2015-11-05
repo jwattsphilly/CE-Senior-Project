@@ -3,17 +3,11 @@ package nocomment.smartthermalmicrowave;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +15,9 @@ import java.util.List;
 /**
  * Created by Darin on 9/16/15.
  */
-public class DisplaySearchResultsSBN extends Activity {
+public class DisplaySearchResults extends Activity {
+
+    // TODO: Combine with DisplaySearchResultsUPC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +28,21 @@ public class DisplaySearchResultsSBN extends Activity {
 
         List<FoodItem> resultsReturned = new ArrayList<FoodItem>();
 
-        String searchString = intent.getStringExtra(SearchByName.SEARCH_STRING);
-        resultsReturned = LocalDatabase.getMatches(searchString);
+        String searchString = intent.getStringExtra(MainActivity.SEARCH_STRING);
+
+        try {
+            //If searchString was a long (UPC)
+            if(searchString != null) {
+                long UPC = Long.parseLong(searchString);
+                resultsReturned = LocalDatabase.getMatches(UPC);
+            }
+        }
+        catch(NumberFormatException nfe) {
+//            throw new NumberFormatException("Invalid UPC.");
+            // Not a UPC barcode, so it must be a regular String
+            resultsReturned = LocalDatabase.getMatches(searchString);
+        }
+
 
         if (resultsReturned.size() == 0){
             List<String> resultsReturnedString = new ArrayList<String>();
@@ -54,7 +63,7 @@ public class DisplaySearchResultsSBN extends Activity {
 
                     FoodItem selectedFood = (FoodItem) listView.getItemAtPosition(position);
 
-                    Intent intention = new Intent(DisplaySearchResultsSBN.this, InstructionsActivity.class);
+                    Intent intention = new Intent(DisplaySearchResults.this, InstructionsActivity.class);
 
                     Bundle foodItemBundle = new Bundle();
                     foodItemBundle.putString("Food_Type", selectedFood.getFoodType());

@@ -1,9 +1,12 @@
 package nocomment.smartthermalmicrowave;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by James Watts on 8/28/15.
  */
-public class FoodItem {
+public class FoodItem implements Parcelable{
     private String food_type;
     private String brand_name;
     private boolean frozen;
@@ -70,5 +73,17 @@ public class FoodItem {
             frozenString = "Not Frozen";
 
         return "Food Type: " + food_type + " (" + frozenString + ")" + "\tBrand Name: " + brand_name ;
+    }
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

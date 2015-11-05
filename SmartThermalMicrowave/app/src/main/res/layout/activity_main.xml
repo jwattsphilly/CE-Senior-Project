@@ -33,19 +33,6 @@
             android:onClick="searchByName"/>
 
         <Button
-            android:id="@+id/btn_browse_items"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="300dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="#578"
-            android:textSize="50sp"
-            android:textColor="#FFF"
-            android:text="@string/button_browse"
-            android:onClick="browseByItem" />
-
-        <Button
             android:id="@+id/btn_scan_upc"
             android:layout_width="0dp"
             android:layout_weight="1"

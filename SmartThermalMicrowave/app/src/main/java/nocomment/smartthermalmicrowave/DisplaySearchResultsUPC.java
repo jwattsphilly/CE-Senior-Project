@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class DisplaySearchResultsUPC extends Activity {
 
+    // TODO: Get rid of this class entirely!
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,7 @@ public class DisplaySearchResultsUPC extends Activity {
 
         try {
             //If searchString was a long (UPC)
-            String searchString = intent.getStringExtra(ScanUPC.UPC_SEARCH_STRING);
+            String searchString = intent.getStringExtra(MainActivity.SEARCH_STRING);
             if(searchString != null) {
                 long UPC = Long.parseLong(searchString);
                 resultsReturned = LocalDatabase.getMatches(UPC);
