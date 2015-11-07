@@ -15,47 +15,37 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="550px"
         android:layout_centerInParent="true"
         android:padding="10dp"
         android:orientation="horizontal">
 
         <Button
+            style="@style/Button"
             android:id="@+id/btn_search_by_name"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="300dp"
-            android:layout_marginRight="5dp"
-            android:background="#578"
-            android:textSize="50sp"
-            android:textColor="#FFF"
             android:text="@string/button_search_by_name"
             android:onClick="searchByName"/>
 
         <Button
+            style="@style/Button"
             android:id="@+id/btn_scan_upc"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="300dp"
-            android:layout_marginLeft="5dp"
-            android:background="#578"
-            android:textSize="50sp"
-            android:textColor="#FFF"
             android:text="@string/button_scan_upc"
             android:onClick="scanUPC" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Button"
+            android:id="@+id/manual_microwave_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="Manual Microwave Control Panel"
-            android:id="@+id/button"
+
             android:onClick="manualControl" />
     </LinearLayout>
 </RelativeLayout>
