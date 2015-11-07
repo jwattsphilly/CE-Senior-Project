@@ -59,15 +59,47 @@ public class LocalDatabase {
         }
     }
 
-    public static List<FoodItem> getMatches(String foodName){
-        // TODO: split space-delimited Strings and search all of said Strings (AND, not OR)
-        List<FoodItem> returnList = new ArrayList<FoodItem>();
-        for (FoodItem item:foodList) {
-            if(item.getFoodType().toLowerCase().contains(foodName.toLowerCase()) ||
-                    item.getBrandName().toLowerCase().contains(foodName.toLowerCase())){
-                returnList.add(item);
-            }
+    private static ArrayList<String> splitSearchString(String searchString)
+    {
+        ArrayList<String> returnList = new ArrayList<String>();
+        String restOfString = searchString;
+        int spaceIndex = restOfString.indexOf(' ');  // Get first space (if it exists)
+
+        while(spaceIndex >= 0)
+        {
+            // Get the first part of the search string
+            returnList.add(restOfString.substring(0, spaceIndex));
+            // Get the rest of the search string
+            restOfString = restOfString.substring(spaceIndex+1);
+            // Check to see if there are anymore spaces
+            spaceIndex = restOfString.indexOf(' ');
         }
+
+        returnList.add(restOfString);  // Add the last part of the search string
+        return returnList;
+    }
+
+    public static List<FoodItem> getMatches(String foodName){
+        // Split space-delimited Strings and search all of said Strings (AND, not OR)
+        ArrayList<String> inputStrings = splitSearchString(foodName);
+
+        List<FoodItem> returnList = new ArrayList<FoodItem>();
+
+        for(FoodItem item:foodList)
+        {
+            boolean containsAll = true;
+
+            for(String inputString:inputStrings)    // Make sure the food item contains all of the input strings
+            {
+                if(!item.getFoodType().toLowerCase().contains(inputString.toLowerCase())
+                        && !item.getBrandName().toLowerCase().contains(inputString.toLowerCase()))
+                    containsAll = false;
+            }
+
+            if(containsAll)
+                returnList.add(item);
+        }
+
         return returnList;
     }
 
