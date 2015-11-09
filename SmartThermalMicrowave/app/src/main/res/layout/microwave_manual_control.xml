@@ -128,7 +128,7 @@
             android:id="@+id/timerTextView"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:textSize="50dp" />
+            android:textSize="50sp" />
 
         <LinearLayout
             android:orientation="horizontal"

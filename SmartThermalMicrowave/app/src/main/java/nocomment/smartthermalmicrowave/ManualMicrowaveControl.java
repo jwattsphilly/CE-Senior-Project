@@ -2,6 +2,7 @@ package nocomment.smartthermalmicrowave;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,8 @@ public class ManualMicrowaveControl extends Activity
     private String timerString;
     private int powerLevel;
     private TextView timerText;
+    private CountDownTimer timer = null;
+    private int secondsUntilFinished = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class ManualMicrowaveControl extends Activity
 
     public void pressButton(View view)
     {
+        timerText = (TextView) findViewById(R.id.timerTextView);
         switch(view.getId())
         {
             case R.id.button0:
@@ -72,9 +76,9 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 1:00
                     {
                         timerString = "100";                // Timer string now 1 minute
-                        timerText.setText("01:00");         // Update TextView
+//                        timerText.setText("01:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b1");     // Send message to microwave
-                        // TODO: Start the timer for 1 minute
+                        startTimer(60);                     // Start the timer for 1 minute
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -103,9 +107,9 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 2:00
                     {
                         timerString = "200";                // Timer string now 2 minutes
-                        timerText.setText("02:00");         // Update TextView
+//                        timerText.setText("02:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b2");     // Send message to microwave
-                        // TODO: Start the timer for 2 minutes
+                        startTimer(120);                    // Start the timer for 2 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -134,9 +138,9 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 3:00
                     {
                         timerString = "300";                // Timer string now 3 minutes
-                        timerText.setText("03:00");         // Update TextView
+//                        timerText.setText("03:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b3");     // Send message to microwave
-                        // TODO: Start the timer for 3 minutes
+                        startTimer(180);                    // Start the timer for 3 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -165,9 +169,9 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 4:00
                     {
                         timerString = "400";                // Timer string now 4 minutes
-                        timerText.setText("04:00");         // Update TextView
+//                        timerText.setText("04:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b4");     // Send message to microwave
-                        // TODO: Start the timer for 4 minutes
+                        startTimer(240);                    // Start the timer for 4 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -196,9 +200,9 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 5:00
                     {
                         timerString = "500";                // Timer string now 5 minutes
-                        timerText.setText("05:00");         // Update TextView
+//                        timerText.setText("05:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b5");     // Send message to microwave
-                        // TODO: Start the timer for 5 minutes
+                        startTimer(300);                    // Start the timer for 5 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -227,9 +231,9 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 6:00
                     {
                         timerString = "600";                // Timer string now 6 minutes
-                        timerText.setText("06:00");         // Update TextView
+//                        timerText.setText("06:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b6");     // Send message to microwave
-                        // TODO: Start the timer for 6 minutes
+                        startTimer(360);                    // Start the timer for 6 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -327,30 +331,34 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Set timer to 30 seconds
                     {
                         timerString = "30";
-                        timerText.setText("00:30");         // Update TextView
+//                        timerText.setText("00:30");         // Update TextView
                         UsbSingleton.sendDataUSB("s");      // Send message to microwave
-                        // TODO: Start the timer for 30 seconds
+                        startTimer(30);                     // Start the timer for 30 seconds
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
                     case TIME_COOK: // Start
                     case POWER:     // Start
                     {
-                        UsbSingleton.sendDataUSB("s");      // Send message to microwave
-                        // TODO: Start the timer using timerString
-                        mode = MicrowaveMode.RUNNING;
+                        if(!timerString.isEmpty())
+                        {
+                            UsbSingleton.sendDataUSB("s");      // Send message to microwave
+                            startTimer(convertToSeconds(convertToMinutesAndSeconds(timerString)));  // Start the timer using timerString
+                            mode = MicrowaveMode.RUNNING;
+                        }
                         break;
                     }
                     case RUNNING:   // add 30 seconds
                     {
                         UsbSingleton.sendDataUSB("s");      // Send message to microwave
-                        // TODO: Update TextView
-                        // TODO: Add 30 seconds to the timer
+                        timer.cancel();
+                        secondsUntilFinished+=30;           // Add 30 seconds to the timer
+                        startTimer(secondsUntilFinished);
                         break;
                     }
                     case PAUSED:
                     {
-                        // TODO: Restart the timer using the time left over
+                        startTimer(secondsUntilFinished);
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -373,7 +381,7 @@ public class ManualMicrowaveControl extends Activity
                     case RUNNING:   // Pause
                     {
                         UsbSingleton.sendDataUSB("S");      // Send message to microwave
-                        // TODO: Pause the timer
+                        timer.cancel();
                         mode = MicrowaveMode.PAUSED;
                         break;
                     }
@@ -427,6 +435,39 @@ public class ManualMicrowaveControl extends Activity
         }
     }
 
+    private void startTimer(final int timeLeft)
+    {
+        secondsUntilFinished = timeLeft;
+        timer = new CountDownTimer(timeLeft * 1000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                secondsUntilFinished = (int) (millisUntilFinished / 1000);
+                timerText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+                secondsUntilFinished = 0;
+//                timerText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
+                timerText.setText("Enjoy!");
+                // YAY!  We finished!
+            }
+        };
+        timer.start();
+    }
+
+    // TODO: Test this
+    private int convertToSeconds(String minutesAndSecondsString)
+    {
+        int index = minutesAndSecondsString.indexOf(':');
+        int seconds = Integer.parseInt(minutesAndSecondsString.substring(index+1));
+        int minutes = Integer.parseInt(minutesAndSecondsString.substring(0,index));
+
+        seconds+=(60*minutes);
+
+        return seconds;
+    }
 
     private String convertToMinutesAndSeconds(String tString)
     {
