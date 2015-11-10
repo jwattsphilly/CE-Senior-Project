@@ -87,4 +87,5 @@ Time Cook	12		11
 Power		A0		12
 Start/+30 sec.	A1		13
 Stop/Cancel	A2		14
+Motor		A3		15
 

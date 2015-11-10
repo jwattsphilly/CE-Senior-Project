@@ -33,7 +33,6 @@ public class SearchByName extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO: Launch newly renamed (and merged) SearchResults Activity
     public void executeSearch(View view)
     {
         Intent intent = new Intent(this, DisplaySearchResults.class);

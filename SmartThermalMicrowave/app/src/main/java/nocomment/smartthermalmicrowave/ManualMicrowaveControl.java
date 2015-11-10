@@ -76,7 +76,6 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 1:00
                     {
                         timerString = "100";                // Timer string now 1 minute
-//                        timerText.setText("01:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b1");     // Send message to microwave
                         startTimer(60);                     // Start the timer for 1 minute
                         mode = MicrowaveMode.RUNNING;
@@ -107,7 +106,6 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 2:00
                     {
                         timerString = "200";                // Timer string now 2 minutes
-//                        timerText.setText("02:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b2");     // Send message to microwave
                         startTimer(120);                    // Start the timer for 2 minutes
                         mode = MicrowaveMode.RUNNING;
@@ -138,7 +136,6 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 3:00
                     {
                         timerString = "300";                // Timer string now 3 minutes
-//                        timerText.setText("03:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b3");     // Send message to microwave
                         startTimer(180);                    // Start the timer for 3 minutes
                         mode = MicrowaveMode.RUNNING;
@@ -169,7 +166,6 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 4:00
                     {
                         timerString = "400";                // Timer string now 4 minutes
-//                        timerText.setText("04:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b4");     // Send message to microwave
                         startTimer(240);                    // Start the timer for 4 minutes
                         mode = MicrowaveMode.RUNNING;
@@ -200,7 +196,6 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 5:00
                     {
                         timerString = "500";                // Timer string now 5 minutes
-//                        timerText.setText("05:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b5");     // Send message to microwave
                         startTimer(300);                    // Start the timer for 5 minutes
                         mode = MicrowaveMode.RUNNING;
@@ -231,7 +226,6 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Start microwave at 6:00
                     {
                         timerString = "600";                // Timer string now 6 minutes
-//                        timerText.setText("06:00");         // Update TextView
                         UsbSingleton.sendDataUSB("b6");     // Send message to microwave
                         startTimer(360);                    // Start the timer for 6 minutes
                         mode = MicrowaveMode.RUNNING;
@@ -331,7 +325,6 @@ public class ManualMicrowaveControl extends Activity
                     case EXPRESS:   // Set timer to 30 seconds
                     {
                         timerString = "30";
-//                        timerText.setText("00:30");         // Update TextView
                         UsbSingleton.sendDataUSB("s");      // Send message to microwave
                         startTimer(30);                     // Start the timer for 30 seconds
                         mode = MicrowaveMode.RUNNING;
@@ -457,7 +450,6 @@ public class ManualMicrowaveControl extends Activity
         timer.start();
     }
 
-    // TODO: Test this
     private int convertToSeconds(String minutesAndSecondsString)
     {
         int index = minutesAndSecondsString.indexOf(':');

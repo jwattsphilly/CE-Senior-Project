@@ -17,8 +17,6 @@ import java.util.List;
  */
 public class DisplaySearchResults extends Activity {
 
-    // TODO: Combine with DisplaySearchResultsUPC
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
