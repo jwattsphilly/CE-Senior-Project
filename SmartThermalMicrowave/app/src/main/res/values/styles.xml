@@ -1,18 +1,45 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--<item name="android:background">#FF000000</item>-->
         <!-- Customize your theme here. -->
     </style>
 
     <style name="Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">30sp</item>
-        <item name="android:background">@drawable/button_shape</item>
-        <item name="android:shadowColor">#A8A8A8</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">0</item>
-        <item name="android:shadowRadius">5</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    
+    <style name="HugeButton" parent="Button">2
+        <item name="android:background">@drawable/button_shape_huge_large</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="LargeButton" parent="Button">
+        <item name="android:background">@drawable/button_shape_huge_large</item>
+        <!--<item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>-->
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="MediumButton" parent="Button">
+        <item name="android:background">@drawable/button_shape_medium_small</item>
+        <!--<item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>-->
+        <item name="android:textSize">20dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
+    <style name="SmallButton" parent="Button">
+        <item name="android:background">@drawable/button_shape_medium_small</item>
+        <!--<item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>-->
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_margin">3dp</item>
     </style>
 </resources>

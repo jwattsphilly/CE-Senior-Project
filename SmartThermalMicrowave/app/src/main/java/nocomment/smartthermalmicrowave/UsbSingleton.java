@@ -1,7 +1,6 @@
 package nocomment.smartthermalmicrowave;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.SystemClock;
 
 /**

@@ -1,36 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:includeFontPadding="true"-->
-        <!--android:text="@string/main_page_title"-->
-        <!--android:textSize="75sp"-->
-        <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+    android:background="#FF000000">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="550px"
+        android:layout_height="300dp"
         android:layout_centerInParent="true"
         android:padding="10dp"
         android:orientation="horizontal">
 
         <Button
-            style="@style/Button"
+            style="@style/HugeButton"
             android:id="@+id/btn_search_by_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/button_search_by_name"
-            android:onClick="searchByName"/>
+            android:onClick="searchByName" />
 
         <Button
-            style="@style/Button"
+            style="@style/HugeButton"
             android:id="@+id/btn_scan_upc"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -39,13 +29,12 @@
             android:onClick="scanUPC" />
 
         <Button
-            style="@style/Button"
+            style="@style/HugeButton"
             android:id="@+id/manual_microwave_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Manual Microwave Control Panel"
-
+            android:text="@string/button_manual_control"
             android:onClick="manualControl" />
     </LinearLayout>
 </RelativeLayout>
