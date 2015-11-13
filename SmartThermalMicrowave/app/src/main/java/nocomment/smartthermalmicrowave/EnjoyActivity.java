@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 /**
  * Created by jameswatts on 10/15/15.
@@ -38,11 +39,24 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
         add30Button.setText("+30 seconds?");
         add30Button.setOnClickListener(this);
 
+        ToggleButton motorControlButton = new ToggleButton(this);
+        motorControlButton.setText("Stop Plate");
+        motorControlButton.setTextOff("Stop Plate");
+        motorControlButton.setTextOn("Start Plate");
+        motorControlButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
+                    }
+                }
+        );
+
         LinearLayout rootLayout = new LinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
 
         LinearLayout.LayoutParams enjoyParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2);
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 3);
         LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
 
@@ -50,6 +64,7 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
         buttonParams.gravity = Gravity.CENTER_HORIZONTAL;
 
         rootLayout.addView(enjoyView, enjoyParams);
+        rootLayout.addView(motorControlButton, buttonParams);
         rootLayout.addView(add30Button, buttonParams);
 
         setContentView(rootLayout);

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class MicrowaveRunningActivity extends Activity {
     private TextView counterText = null;
     private TextView stirText = null;
     private Button stopStartButton = null;
+    private ToggleButton motorControlButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,7 +67,7 @@ public class MicrowaveRunningActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(isRunning)               // Stop timer
+                        if (isRunning)               // Stop timer
                         {
                             // Send the "S" (Pause) instruction to the Arduino
                             UsbSingleton.sendDataUSB("S");
@@ -74,8 +76,7 @@ public class MicrowaveRunningActivity extends Activity {
                             stirText.setText(" ");
                             stopStartButton.setText("Start");
                             isRunning = false;
-                        }
-                        else                        // Start timer
+                        } else                        // Start timer
                         {
                             // Send "s" (start) instruction to the Arduino
                             UsbSingleton.sendDataUSB("s");
@@ -90,15 +91,36 @@ public class MicrowaveRunningActivity extends Activity {
                 }
         );
 
+        motorControlButton = new ToggleButton(this);
+        motorControlButton.setText("Stop Plate");
+        motorControlButton.setTextOff("Stop Plate");
+        motorControlButton.setTextOn("Start Plate");
+        motorControlButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
+                    }
+                }
+        );
+
         LinearLayout rootLayout = new LinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
 
         rootLayout.addView(counterText, counterTextParams);
-
         rootLayout.addView(stirText, stirTextParams);
 
-        rootLayout.addView(stopStartButton,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
+        LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        buttonParams.gravity = Gravity.CENTER_HORIZONTAL;
+
+        LinearLayout buttonLayout = new LinearLayout(this);
+        buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+        buttonLayout.addView(stopStartButton, buttonParams);
+        buttonLayout.addView(motorControlButton, buttonParams);
+
+        rootLayout.addView(buttonLayout,
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         // Send the first part of the instruction to the Arduino
         UsbSingleton.sendDataUSB(instructionList.get(indexOfInstruction));
