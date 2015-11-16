@@ -8,7 +8,7 @@ import android.os.SystemClock;
  */
 public class UsbSingleton {
     private static final int VID = 0x2341;
-    private static final int PID = 0x0043;//I believe it is 0x0000 for the Arduino Megas
+    private static final int PID = 0x0043;
     private static UsbController sUsbController;
 
     public static void initUSB(Activity context)
