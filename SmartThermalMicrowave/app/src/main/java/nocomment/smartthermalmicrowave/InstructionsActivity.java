@@ -9,12 +9,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by James Watts on 10/13/15.
  */
 public class InstructionsActivity extends Activity {
-
-    // TODO: Make everything visually appealing
 
     public static final int RUN_MICROWAVE_REQUEST = 4;
     public static final int RUN_ENJOY_REQUEST = 5;
@@ -23,6 +23,7 @@ public class InstructionsActivity extends Activity {
     private TextView foodInfoView = null;
     private TextView instructionView = null;
     private boolean isMicrowavable = true;
+    private String codedInstructionString = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,42 +39,15 @@ public class InstructionsActivity extends Activity {
 
         isMicrowavable = (!foodType.equals("Fork"));
 
-        final String codedInstructionString = foodItemBundle.getString("Instructions");
+        codedInstructionString = foodItemBundle.getString("Instructions");
 
-        foodInfoView = new TextView(this);
+        foodInfoView = (TextView) findViewById(R.id.text_view_food_info);
         foodInfoView.setText(foodType + frozenString + "\n" + brandName);
-        foodInfoView.setTextSize(25);
 
-        instructionView = new TextView(this);
+        instructionView = (TextView) findViewById(R.id.text_view_instruction);
         instructionView.setText(LocalDatabase.parseInstructionString(codedInstructionString));
 
-        selectButton = new Button(this);
-        selectButton.setText("Select");
-        selectButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Start a new MicrowaveRunningActivity
-                        Intent microwaveRunningIntent = new Intent(InstructionsActivity.this, MicrowaveRunningActivity.class);
-                        microwaveRunningIntent.putExtra("Coded Instruction", codedInstructionString);
-                        startActivityForResult(microwaveRunningIntent, RUN_MICROWAVE_REQUEST);
-                    }
-                }
-        );
-
-        LinearLayout rootLayout = new LinearLayout(this);
-        rootLayout.setOrientation(LinearLayout.VERTICAL);
-
-        rootLayout.addView(foodInfoView,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 2));
-
-        rootLayout.addView(instructionView,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 2));
-
-        rootLayout.addView(selectButton,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
-
-        setContentView(rootLayout);
+        setContentView(R.layout.activity_instructions);
     }
 
 
@@ -93,5 +67,10 @@ public class InstructionsActivity extends Activity {
         }
     }
 
-
+    public void selectButtonOnClick(View v)
+    {
+        Intent microwaveRunningIntent = new Intent(InstructionsActivity.this, MicrowaveRunningActivity.class);
+        microwaveRunningIntent.putExtra("Coded Instruction", codedInstructionString);
+        startActivityForResult(microwaveRunningIntent, RUN_MICROWAVE_REQUEST);
+    }
 }

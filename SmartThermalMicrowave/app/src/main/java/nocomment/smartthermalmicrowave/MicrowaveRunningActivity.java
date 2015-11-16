@@ -19,8 +19,6 @@ import java.util.ArrayList;
  */
 public class MicrowaveRunningActivity extends Activity {
 
-    // TODO: Make everything visually appealing
-
     private int secondsUntilFinished = 0;
     private int timeOfNextStir = 0;
     private int indexOfInstruction = 0;
@@ -47,85 +45,15 @@ public class MicrowaveRunningActivity extends Activity {
 
         timeOfNextStir = getTimeOfNextStir(instructionList, indexOfInstruction);
 
-        counterText = new TextView(this);
+        counterText = (TextView) findViewById(R.id.text_box_counter_text);
         counterText.setText(LocalDatabase.secondsToString(totalTimeSeconds));
-        counterText.setTextSize(75);
-        LinearLayout.LayoutParams counterTextParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2);
-        counterTextParams.gravity = Gravity.CENTER_HORIZONTAL;
 
-        stirText = new TextView(this);
-        stirText.setText(" ");
-        stirText.setTextSize(50);
-        LinearLayout.LayoutParams stirTextParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2);
-        stirTextParams.gravity = Gravity.CENTER_HORIZONTAL;
-
-        stopStartButton = new Button(this);
-        stopStartButton.setText("Start");
-        stopStartButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (isRunning)               // Stop timer
-                        {
-                            // Send the "S" (Pause) instruction to the Arduino
-                            UsbSingleton.sendDataUSB("S");
-                            // Stop our timer
-                            counter.cancel();
-                            stirText.setText(" ");
-                            stopStartButton.setText("Start");
-                            isRunning = false;
-                        } else                        // Start timer
-                        {
-                            // Send "s" (start) instruction to the Arduino
-                            UsbSingleton.sendDataUSB("s");
-                            // Start our counter
-                            startCounter(secondsUntilFinished);
-
-                            stirText.setText(" ");
-                            stopStartButton.setText("Stop");
-                            isRunning = true;
-                        }
-                    }
-                }
-        );
-
-        motorControlButton = new ToggleButton(this);
-        motorControlButton.setText("Stop Plate");
-        motorControlButton.setTextOff("Stop Plate");
-        motorControlButton.setTextOn("Start Plate");
-        motorControlButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
-                    }
-                }
-        );
-
-        LinearLayout rootLayout = new LinearLayout(this);
-        rootLayout.setOrientation(LinearLayout.VERTICAL);
-
-        rootLayout.addView(counterText, counterTextParams);
-        rootLayout.addView(stirText, stirTextParams);
-
-        LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        buttonParams.gravity = Gravity.CENTER_HORIZONTAL;
-
-        LinearLayout buttonLayout = new LinearLayout(this);
-        buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-        buttonLayout.addView(stopStartButton, buttonParams);
-        buttonLayout.addView(motorControlButton, buttonParams);
-
-        rootLayout.addView(buttonLayout,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        stirText = (TextView) findViewById(R.id.text_box_stir_text);
 
         // Send the first part of the instruction to the Arduino
         UsbSingleton.sendDataUSB(instructionList.get(indexOfInstruction));
 
-        setContentView(rootLayout);
+        setContentView(R.layout.activity_microwave_running);
     }
 
     private void startCounter(final int timeLeft)
@@ -175,6 +103,30 @@ public class MicrowaveRunningActivity extends Activity {
         }
 
         return time;
+    }
+
+    public void startStopOnClick(View v)
+    {
+        if (isRunning)               // Stop timer
+        {
+            // Send the "S" (Pause) instruction to the Arduino
+            UsbSingleton.sendDataUSB("S");
+            // Stop our timer
+            counter.cancel();
+            stirText.setText(" ");
+            stopStartButton.setText("Start");
+            isRunning = false;
+        } else                        // Start timer
+        {
+            // Send "s" (start) instruction to the Arduino
+            UsbSingleton.sendDataUSB("s");
+            // Start our counter
+            startCounter(secondsUntilFinished);
+
+            stirText.setText(" ");
+            stopStartButton.setText("Stop");
+            isRunning = true;
+        }
     }
 
 }

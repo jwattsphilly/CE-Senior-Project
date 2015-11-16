@@ -15,7 +15,7 @@ import android.widget.ToggleButton;
 /**
  * Created by jameswatts on 10/15/15.
  */
-public class EnjoyActivity extends Activity implements View.OnClickListener{
+public class EnjoyActivity extends Activity{
 
     private TextView enjoyView = null;
     private boolean counterIsRunning = false;
@@ -26,52 +26,13 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
     {
         super.onCreate(savedInstanceState);
 
-        // TODO: Make everything visually appealing
-
         Intent intent = getIntent();
         isMicrowavable = intent.getBooleanExtra("Microwavable",true);
 
-        enjoyView = new TextView(this);
-        enjoyView.setText("Enjoy!");
-        enjoyView.setTextSize(75);
-
-        Button add30Button = new Button(this);
-        add30Button.setText("+30 seconds?");
-        add30Button.setOnClickListener(this);
-
-        ToggleButton motorControlButton = new ToggleButton(this);
-        motorControlButton.setText("Stop Plate");
-        motorControlButton.setTextOff("Stop Plate");
-        motorControlButton.setTextOn("Start Plate");
-        motorControlButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
-                    }
-                }
-        );
-
-        LinearLayout rootLayout = new LinearLayout(this);
-        rootLayout.setOrientation(LinearLayout.VERTICAL);
-
-        LinearLayout.LayoutParams enjoyParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 3);
-        LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-
-        enjoyParams.gravity = Gravity.CENTER_HORIZONTAL;
-        buttonParams.gravity = Gravity.CENTER_HORIZONTAL;
-
-        rootLayout.addView(enjoyView, enjoyParams);
-        rootLayout.addView(motorControlButton, buttonParams);
-        rootLayout.addView(add30Button, buttonParams);
-
-        setContentView(rootLayout);
+        setContentView(R.layout.activity_enjoy);
     }
 
-    @Override
-    public void onClick(View v) {
+    public void addThirty(View v) {
 
         if(isMicrowavable) {
             if (!counterIsRunning) {
@@ -102,5 +63,10 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
         {
             enjoyView.setText("Nice try, but that's not going to work!");
         }
+    }
+
+    public void togglePlate(View v)
+    {
+        UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
     }
 }
