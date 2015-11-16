@@ -174,8 +174,8 @@
                     style="@style/MediumButton"
                     android:text="New ToggleButton"
                     android:id="@+id/plateToggleBtn"
-                    android:textOff="Stop Plate"
-                    android:textOn="Start Plate"
+                    android:textOff="Toggle Plate"
+                    android:textOn="Toggle Plate"
                     android:checked="false"
                     android:onClick="pressButton" />
             </LinearLayout>

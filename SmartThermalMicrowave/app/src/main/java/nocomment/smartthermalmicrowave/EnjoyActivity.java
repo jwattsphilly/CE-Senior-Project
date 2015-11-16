@@ -40,9 +40,9 @@ public class EnjoyActivity extends Activity implements View.OnClickListener{
         add30Button.setOnClickListener(this);
 
         ToggleButton motorControlButton = new ToggleButton(this);
-        motorControlButton.setText("Stop Plate");
-        motorControlButton.setTextOff("Stop Plate");
-        motorControlButton.setTextOn("Start Plate");
+        motorControlButton.setText("Toggle Plate");
+        motorControlButton.setTextOff("Toggle Plate");
+        motorControlButton.setTextOn("Toggle Plate");
         motorControlButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
