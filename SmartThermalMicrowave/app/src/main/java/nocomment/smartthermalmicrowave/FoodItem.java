@@ -9,19 +9,21 @@ public class FoodItem{
     private boolean frozen;
     private long upc;
     private String instructions;
+    private byte[] image;
 
     /**
      * Constructor for a FoodItem object
      *
      * @author James Watts
      */
-    public FoodItem(String food_type, String brand_name, boolean frozen, long upc, String instructions){
+    public FoodItem(String food_type, String brand_name, boolean frozen, long upc, String instructions, byte[] image){
 
         this.food_type = food_type;
         this.brand_name = brand_name;
         this.frozen = frozen;
         this.upc = upc;
         this.instructions = instructions;
+        this.image = image;
     }
 
     /**
@@ -59,6 +61,9 @@ public class FoodItem{
         return instructions;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
 
     @Override
     public String toString()

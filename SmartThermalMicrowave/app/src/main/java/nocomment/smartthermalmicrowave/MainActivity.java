@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 
 //        while(LocalDatabase.foodList.isEmpty()){}   //TODO This is a bad plan...
 
-       // UsbSingleton.initUSB(this);
+        UsbSingleton.initUSB(this);
 
         setContentView(R.layout.activity_main);
     }

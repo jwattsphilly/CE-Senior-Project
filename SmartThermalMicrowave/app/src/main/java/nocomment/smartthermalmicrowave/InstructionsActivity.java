@@ -2,10 +2,13 @@ package nocomment.smartthermalmicrowave;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +25,7 @@ public class InstructionsActivity extends Activity {
     private Button selectButton = null;
     private TextView foodInfoView = null;
     private TextView instructionView = null;
+    private ImageView foodImage = null;
     private boolean isMicrowavable = true;
     private String codedInstructionString = null;
 
@@ -35,11 +39,13 @@ public class InstructionsActivity extends Activity {
         String foodType = foodItemBundle.getString("Food_Type");
         String brandName = foodItemBundle.getString("Brand_Name");
         boolean frozen = foodItemBundle.getBoolean("Frozen");
-        String frozenString = frozen ? " (Frozen)": " (Not frozen)";
+        String frozenString = frozen ? " (Frozen)": " (Not Frozen)";
+        byte[] imageArray = foodItemBundle.getByteArray("Image_Byte_Array");
 
         isMicrowavable = (!foodType.equals("Fork"));
-
         codedInstructionString = foodItemBundle.getString("Instructions");
+
+        setContentView(R.layout.activity_instructions);
 
         foodInfoView = (TextView) findViewById(R.id.text_view_food_info);
         foodInfoView.setText(foodType + frozenString + "\n" + brandName);
@@ -47,7 +53,16 @@ public class InstructionsActivity extends Activity {
         instructionView = (TextView) findViewById(R.id.text_view_instruction);
         instructionView.setText(LocalDatabase.parseInstructionString(codedInstructionString));
 
-        setContentView(R.layout.activity_instructions);
+        foodImage = (ImageView) findViewById(R.id.image_view_food_image);
+
+        if(imageArray == null)
+            foodImage.setImageResource(R.drawable.microwave);
+
+        else
+        {
+            Bitmap foodBitmap = BitmapFactory.decodeByteArray(imageArray, 0, imageArray.length);
+            foodImage.setImageBitmap(foodBitmap);
+        }
     }
 
 

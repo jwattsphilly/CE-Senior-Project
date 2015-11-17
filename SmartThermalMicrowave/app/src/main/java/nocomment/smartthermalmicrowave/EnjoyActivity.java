@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by jameswatts on 10/15/15.
  */
@@ -30,6 +32,8 @@ public class EnjoyActivity extends Activity{
         isMicrowavable = intent.getBooleanExtra("Microwavable",true);
 
         setContentView(R.layout.activity_enjoy);
+
+        enjoyView = (TextView) findViewById(R.id.text_view_enjoy_view);
     }
 
     public void addThirty(View v) {

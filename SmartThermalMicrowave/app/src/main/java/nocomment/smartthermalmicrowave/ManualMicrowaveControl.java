@@ -30,7 +30,6 @@ public class ManualMicrowaveControl extends Activity
         mode = MicrowaveMode.EXPRESS;
         timerString = "";
         powerLevel = 10;
-        timerText = (TextView) findViewById(R.id.timerTextView);
         setContentView(R.layout.microwave_manual_control);
     }
 
@@ -486,6 +485,11 @@ public class ManualMicrowaveControl extends Activity
         String secondsString = (seconds > 9) ? ""+seconds : "0"+seconds;
 
         return minutesString + ":" + secondsString;
+    }
+
+    public void togglePlate(View v)
+    {
+        UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
     }
 
 }

@@ -27,7 +27,10 @@ public class UsbSingleton {
             sUsbController.send((byte) (substring & 0xFF));
         }
         SystemClock.sleep(5);   //Give the arduino time to process
-        sUsbController.send((byte) ('f' & 0xFF));
+        sUsbController.send((byte) ('f' & 0xFF));   //Send the payload termination character
+
+        if(payload.equals("s"))
+            SystemClock.sleep(500);
     }
 
     private static final IUsbConnectionHandler mConnectionHandler = new IUsbConnectionHandler() {

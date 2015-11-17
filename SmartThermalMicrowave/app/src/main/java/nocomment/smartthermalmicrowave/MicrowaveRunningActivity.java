@@ -29,7 +29,6 @@ public class MicrowaveRunningActivity extends Activity {
     private TextView counterText = null;
     private TextView stirText = null;
     private Button stopStartButton = null;
-    private ToggleButton motorControlButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,15 +44,17 @@ public class MicrowaveRunningActivity extends Activity {
 
         timeOfNextStir = getTimeOfNextStir(instructionList, indexOfInstruction);
 
+        setContentView(R.layout.activity_microwave_running);
+
         counterText = (TextView) findViewById(R.id.text_box_counter_text);
         counterText.setText(LocalDatabase.secondsToString(totalTimeSeconds));
 
         stirText = (TextView) findViewById(R.id.text_box_stir_text);
 
+        stopStartButton = (Button) findViewById(R.id.btn_start_stop);
+
         // Send the first part of the instruction to the Arduino
         UsbSingleton.sendDataUSB(instructionList.get(indexOfInstruction));
-
-        setContentView(R.layout.activity_microwave_running);
     }
 
     private void startCounter(final int timeLeft)
@@ -129,4 +130,8 @@ public class MicrowaveRunningActivity extends Activity {
         }
     }
 
+    public void togglePlate(View v)
+    {
+        UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
+    }
 }

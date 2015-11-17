@@ -1,5 +1,7 @@
 package nocomment.smartthermalmicrowave;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -41,8 +43,13 @@ public class LocalDatabase {
                 boolean frozen = results.getBoolean("FROZEN");
                 long upc = results.getLong("UPC_BARCODE");
                 String instructions = results.getString("INSTRUCTIONS");
+                Blob imageBlob = results.getBlob("FOOD_IMAGE");
+                byte[] imageArray = null;
 
-                FoodItem newItem = new FoodItem(food_type, brand_name, frozen, upc, instructions);
+                if(imageBlob != null)
+                    imageArray = imageBlob.getBytes(1, (int) imageBlob.length());
+
+                FoodItem newItem = new FoodItem(food_type, brand_name, frozen, upc, instructions, imageArray);
 
                 foodList.add(newItem);
             }

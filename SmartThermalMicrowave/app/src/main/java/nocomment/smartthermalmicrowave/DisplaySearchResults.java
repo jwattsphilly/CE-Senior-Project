@@ -52,9 +52,8 @@ public class DisplaySearchResults extends Activity {
         }
         else
         {
-            ArrayAdapter<FoodItem> arrayAdapter = new ArrayAdapter<FoodItem>(this, android.R.layout.simple_list_item_1, resultsReturned);
             final ListView listView = (ListView) findViewById(R.id.search_results);
-            listView.setAdapter(arrayAdapter);
+            listView.setAdapter(new FoodAdapter(this, resultsReturned));
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
@@ -68,6 +67,7 @@ public class DisplaySearchResults extends Activity {
                     foodItemBundle.putString("Brand_Name", selectedFood.getBrandName());
                     foodItemBundle.putBoolean("Frozen", selectedFood.getFrozen());
                     foodItemBundle.putString("Instructions", selectedFood.getInstructions());
+                    foodItemBundle.putByteArray("Image_Byte_Array", selectedFood.getImage());
 
                     intention.putExtra("FoodItemBundle", foodItemBundle);
 

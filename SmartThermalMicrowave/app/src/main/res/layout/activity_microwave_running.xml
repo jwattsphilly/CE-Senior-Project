@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/text_box_stir_text"
-        android:text="Stir Text"
+        android:text=" "
         android:textColor="#FFF"
         android:textSize="50dp"
         android:layout_marginBottom="10dp"
@@ -32,6 +32,6 @@
         android:id="@+id/btn_motor_control_microwave_running"
         android:textOff="Stop Plate"
         android:textOn="Start Plate"
-        android:onClick="togglePlate"/> <!--This is in a different .java file. Intersting... -->
+        android:onClick="togglePlate"/>
 
 </LinearLayout>
