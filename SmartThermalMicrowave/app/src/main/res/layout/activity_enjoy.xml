@@ -21,11 +21,10 @@
         android:text="@string/button_add_30"
         android:onClick="addThirty"/>
 
-    <ToggleButton
+    <Button
         style="@style/MediumButton"
         android:id="@+id/btn_motor_control"
-        android:textOff="@string/button_motor_toggle_initial"
-        android:textOn="@string/button_motor_toggle_pressed"
+        android:text="Toggle Plate"
         android:onClick="togglePlate"/>
 
 </LinearLayout>

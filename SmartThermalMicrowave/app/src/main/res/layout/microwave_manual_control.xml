@@ -170,14 +170,12 @@
                     android:id="@+id/buttonStop"
                     android:onClick="pressButton" />
 
-                <ToggleButton
+                <Button
                     style="@style/MediumButton"
-                    android:text="New ToggleButton"
+                    android:text="Toggle Plate"
                     android:id="@+id/plateToggleBtn"
-                    android:textOff="Toggle Plate"
-                    android:textOn="Toggle Plate"
                     android:checked="false"
-                    android:onClick="pressButton" />
+                    android:onClick="togglePlate" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

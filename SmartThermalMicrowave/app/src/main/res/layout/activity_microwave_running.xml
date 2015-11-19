@@ -27,11 +27,10 @@
         android:text="Start"
         android:onClick="startStopOnClick"/>
 
-    <ToggleButton
+    <Button
         style="@style/MediumButton"
         android:id="@+id/btn_motor_control_microwave_running"
-        android:textOff="Stop Plate"
-        android:textOn="Start Plate"
+        android:text="Toggle Plate"
         android:onClick="togglePlate"/>
 
 </LinearLayout>

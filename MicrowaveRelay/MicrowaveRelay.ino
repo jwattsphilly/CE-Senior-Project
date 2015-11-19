@@ -19,10 +19,11 @@
 #define btnStop A2       // Connected to relay 14
 #define btnPlate A3      // Connected to relay 15
 #define btnY A4          // Connected to relay 16
-// Note: pin A5 is purple wire, not currently used
-// Note: pin 0 is red wire, not currently used
-// Note: pin 1 is brown wire, not currently used
-// Note: pin 13 is orange wire, not currently used
+#define fiveVPin A5      // Psuedo power pin for RGB LED
+#define greenLedPin 0    //Status LED green pin (RX Pin)
+#define blueLedPin 1     //Status LED blue pin  (TX Pin)
+#define redLedPin 13     //Status LED red pin
+
 #define SERIAL_TIMEOUT 1000
 #define MAX_SECONDS 5999  // 99 minutes and 59 seconds
 #define POWER_HIGH 10
@@ -30,6 +31,7 @@
 #define POWER_LOW 5
 #define POWER_DEFROST 3
 #define POWER_ZERO 0
+#define HEARTBEAT_TIMEOUT 10000  //10 seconds
 
 /*
  *  (c) Nexus-Computing GmbH Switzerland
@@ -37,7 +39,6 @@
  *      Author: Manuel Di Cerbo
  */
 
-#define LED PB5 // LED is on Pin 13 or Pin 5 of Port B
 /*
  * UART-Initialization from www.mikrocontroller.net
  * Hint: They are awesome! :-)
@@ -104,6 +105,7 @@ char serialCommand, serialParams;
 int cookTimeRemaining = 0;
 long stopTimeMillis = 0;
 boolean plateIsTurning = true;
+long timeLastHeartbeatReceived = 0;
 
 void setup() {
   pinMode(btn0, OUTPUT);          digitalWrite(btn0, HIGH);
@@ -122,6 +124,10 @@ void setup() {
   pinMode(btnStop, OUTPUT);       digitalWrite(btnStop, HIGH);
   pinMode(btnPlate, OUTPUT);      digitalWrite(btnPlate, HIGH);
   pinMode(btnY, OUTPUT);          digitalWrite(btnY, HIGH);
+  pinMode(fiveVPin, OUTPUT);      digitalWrite(fiveVPin, HIGH);
+  pinMode(redLedPin, OUTPUT);     digitalWrite(redLedPin, HIGH);
+  pinMode(greenLedPin, OUTPUT);   digitalWrite(greenLedPin, HIGH);
+  pinMode(blueLedPin, OUTPUT);    digitalWrite(blueLedPin, HIGH);
   
   for(; i < maxUSBMessageLength; i++)
     USBMessage[i] = 0;
@@ -258,6 +264,10 @@ void loop() {
             digitalWrite(btnPlate, HIGH);
           }
           break;
+          
+        case '~':
+          timeLastHeartbeatReceived = millis();
+        break;
       }
     }
 
@@ -267,6 +277,11 @@ void loop() {
     USBMessageIter = 0;
     messageReady = false;
   }
+  
+  //Check heartbeat
+  long currentTime = millis();
+  if(currentTime - timeLastHeartbeatReceived >= HEARTBEAT_TIMEOUT)
+    indicateConnectionLost();
 }
 
 /*
@@ -322,4 +337,8 @@ void setPower(int power) {
   } else {
     pushButton(power + 2);
   }
+}
+
+void indicateConnectionLost(){
+  digitalWrite(redLedPin, LOW);
 }
