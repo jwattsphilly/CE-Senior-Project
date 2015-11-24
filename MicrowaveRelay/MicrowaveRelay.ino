@@ -18,7 +18,7 @@
 #define btnStart A1      // Connected to relay 13
 #define btnStop A2       // Connected to relay 14
 #define btnPlate A3      // Connected to relay 15
-#define btnY A4          // Connected to relay 16
+#define boxFan A4        // Connected to relay 16
 #define fiveVPin A5      // Psuedo power pin for RGB LED
 #define greenLedPin 0    //Status LED green pin (RX Pin)
 #define blueLedPin 1     //Status LED blue pin  (TX Pin)
@@ -123,7 +123,7 @@ void setup() {
   pinMode(btnStart, OUTPUT);      digitalWrite(btnStart, HIGH);
   pinMode(btnStop, OUTPUT);       digitalWrite(btnStop, HIGH);
   pinMode(btnPlate, OUTPUT);      digitalWrite(btnPlate, HIGH);
-  pinMode(btnY, OUTPUT);          digitalWrite(btnY, HIGH);
+  pinMode(boxFan, OUTPUT);        digitalWrite(boxFan, HIGH);
   pinMode(fiveVPin, OUTPUT);      digitalWrite(fiveVPin, HIGH);
   pinMode(redLedPin, OUTPUT);     digitalWrite(redLedPin, HIGH);
   pinMode(greenLedPin, OUTPUT);   digitalWrite(greenLedPin, HIGH);
@@ -244,11 +244,13 @@ void loop() {
         // Start
         case 's':
           pushButton(btnStart);
+          digitalWrite(boxFan, LOW);
           break;
 
         // Stop
         case 'S':
           pushButton(btnStop);
+          digitalWrite(boxFan, HIGH);
           break;
 
         // Plate Toggle
@@ -342,3 +344,4 @@ void setPower(int power) {
 void indicateConnectionLost(){
   digitalWrite(redLedPin, LOW);
 }
+  
