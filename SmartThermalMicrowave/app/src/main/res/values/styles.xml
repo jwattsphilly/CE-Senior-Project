@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!--<item name="android:background">#FF000000</item>-->
+        <item name="android:background">#FF000000</item>
         <item name="android:textColor">#FFF</item>
     </style>
 

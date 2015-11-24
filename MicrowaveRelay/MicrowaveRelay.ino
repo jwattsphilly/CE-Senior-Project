@@ -31,7 +31,7 @@
 #define POWER_LOW 5
 #define POWER_DEFROST 3
 #define POWER_ZERO 0
-#define HEARTBEAT_TIMEOUT 10000  //10 seconds
+#define HEARTBEAT_TIMEOUT 5000  //5 seconds
 
 /*
  *  (c) Nexus-Computing GmbH Switzerland
@@ -269,6 +269,7 @@ void loop() {
           
         case '~':
           timeLastHeartbeatReceived = millis();
+          digitalWrite(redLedPin, HIGH);
         break;
       }
     }
