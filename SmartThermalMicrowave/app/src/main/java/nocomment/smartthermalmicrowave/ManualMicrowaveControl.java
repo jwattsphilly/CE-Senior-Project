@@ -350,6 +350,7 @@ public class ManualMicrowaveControl extends Activity
                     }
                     case PAUSED:
                     {
+                        UsbSingleton.sendDataUSB("s");      // Send message to microwave
                         startTimer(secondsUntilFinished);
                         mode = MicrowaveMode.RUNNING;
                         break;

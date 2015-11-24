@@ -50,6 +50,7 @@ public class EnjoyActivity extends Activity{
 
                     @Override
                     public void onFinish() {
+                        UsbSingleton.sendDataUSB("S");  // Send a stop message to turn off the fan
                         enjoyView.setText("Enjoy!");
                         counterIsRunning = false;
                     }
