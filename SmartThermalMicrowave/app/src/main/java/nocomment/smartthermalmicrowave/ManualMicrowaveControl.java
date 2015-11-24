@@ -441,8 +441,8 @@ public class ManualMicrowaveControl extends Activity
             @Override
             public void onFinish() {
                 secondsUntilFinished = 0;
-//                timerText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
                 timerText.setText("Enjoy!");
+                mode = MicrowaveMode.EXPRESS;
                 // YAY!  We finished!
             }
         };

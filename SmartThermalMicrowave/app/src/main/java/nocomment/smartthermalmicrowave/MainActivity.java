@@ -19,7 +19,6 @@ public class MainActivity extends Activity {
     public final static String EXTRA_MESSAGE = "nocomment.smartthermalmicrowave.MESSAGE";
     public final static String SEARCH_STRING = "nocomment.smartthermalmicrowave.EXTRA_SEARCH_STRING";
 
-//    //TODO Change the priority on this thread so that it doesn't interfere with other important processes
 //    Thread databaseThread = new Thread(new Runnable() {
 //        @Override
 //        public void run() {
@@ -38,7 +37,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 //        View decorView = getWindow().getDecorView();
 //        // Hide the status bar.
 //        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -49,14 +47,17 @@ public class MainActivity extends Activity {
 //        actionBar.hide();
 
 //        databaseThread.start();
+//        while(LocalDatabase.foodList.isEmpty()){}   // This was a bad plan, but we fixed it! :)
 
         new DatabaseConnectionTask().execute();
-
-//        while(LocalDatabase.foodList.isEmpty()){}   //TODO This is a bad plan...
-
         UsbSingleton.initUSB(this);
-
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UsbSingleton.closeConnectionUSB();
     }
 
     @Override
@@ -65,7 +66,6 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -83,13 +83,8 @@ public class MainActivity extends Activity {
 
     //Activity setup for Scan UPC
     public void scanUPC(View view) {
-        // TODO: Make sure this works
         IntentIntegrator scanIntegrator = new IntentIntegrator(this);
         scanIntegrator.initiateScan();
-//        Intent intent = new Intent(this, ScanUPC.class);
-//        String message = "Scan UPC Button Pressed";
-//        intent.putExtra(EXTRA_MESSAGE, message);
-//        startActivity(intent);
     }
 
     //Activity setup for Search By Name
@@ -107,7 +102,6 @@ public class MainActivity extends Activity {
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

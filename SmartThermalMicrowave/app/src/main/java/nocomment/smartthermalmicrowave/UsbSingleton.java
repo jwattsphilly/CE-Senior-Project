@@ -31,6 +31,13 @@ public class UsbSingleton {
         }, 0, heartbeatDelay);
     }
 
+    public static void closeConnectionUSB()
+    {
+        if(sUsbController != null){
+            sUsbController.stop();
+        }
+    }
+
     public static synchronized void sendDataUSB(String payload)
     {
         for(int i=0; i<payload.length(); i++)
