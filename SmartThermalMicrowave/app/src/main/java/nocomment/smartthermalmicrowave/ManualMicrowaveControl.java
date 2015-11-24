@@ -492,4 +492,9 @@ public class ManualMicrowaveControl extends Activity
         UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UsbSingleton.sendDataUSB("SS");// Double click the STOP button to cancel out of anything
+    }
 }
