@@ -1,28 +1,36 @@
-#define LED 13 // LED is on Pin 13 or Pin 5 of Port B
-volatile uint8_t pause=255;
-
+/*
+Adafruit Arduino - Lesson 3. RGB LED
+*/
+int redPin = 13;
+int greenPin = 1;
+int bluePin = 0;
+//uncomment this line if using a Common Anode LED
+#define COMMON_ANODE
 void setup()
 {
-  Serial.begin(9600);
-  pinMode(13, OUTPUT);
+pinMode(redPin, OUTPUT);
+pinMode(greenPin, OUTPUT);
+pinMode(bluePin, OUTPUT);
 }
-
 void loop()
 {
-  if(Serial.available())
-   { 
-   //Serial.print("Got something.");
-    pause = Serial.parseInt();
-    //Serial.print("pause was set to ");
-    //Serial.print(pause); Serial.print(" \n");
-   }
-   else{
-  digitalWrite(LED, HIGH);
-  delay(pause);
-  digitalWrite(LED, LOW);
-  delay(255-pause);
-  
-  //Serial.println(pause);    
-   }
- 
+setColor(255,0,0);
+delay(1);
+setColor(0,255,0);
+delay(1);
+setColor(0,0,255);
+delay(1);
+
 }
+void setColor(int red, int green, int blue)
+{
+#ifdef COMMON_ANODE
+red = 255 - red;
+green = 255 - green;
+blue = 255 - blue;
+#endif
+analogWrite(redPin, red);
+analogWrite(greenPin, green);
+analogWrite(bluePin, blue);
+}
+

@@ -1,0 +1,60 @@
+Documentation	-	on Wednesday, draw out the schematecs/diagrams/figures that we want,
+then we can put them in the report / slideshow / poster.
+	-	final paper
+		-	Review original report, make sure we account for everything we said
+		-	can be done after demo day (Dec 18)
+		-	WRITTEN IN LATEX
+		-	Layout
+			-	Introduction
+			-	motivation for project
+			-	description of project
+				-	Software Tasks
+					-	Android code overview
+					-	Arduino code overview
+				-	Hardware Tasks
+				-	diagrams of how stuff works
+				-	schematic
+			-	overall timeline of events
+			-	challenges
+			-	testing and results, what people thought
+			-	parts lists / bill of materials
+			-	changes we had to make
+			-	stretch goals
+			-	lessons learned?
+			-	references
+	- 	compile our weekly logs
+	-	hot spot map
+	-	
+
+Demo Day	-
+	-	invites for friends / family / classmates
+	-	can we do it in the presentation room?
+	-	need lots of microwave food - Thursday night / friday morning
+	- 	slideshow - Wednesday before d-day
+	-	oral presentation prep - Wednesday before d-day
+	- 	Poster
+		-	get quotes 
+		-	design done by Monday before d-day so we can print by Friday
+	-	need to test how long the tablet will last
+	
+Physical Build	-	try to finish this all Monday
+	-	Mount the fans to the case
+		-	need drill and bits to do so
+		-	mount with velcro
+	-	need second tablet for seek	
+	-	covering front panel buttons
+	-	power strip
+	-	USB split for charging
+	-	more adapter cables?
+		
+Web Site	-	make sure with Ken that this isn't needed
+	-	necessary?
+	-	maybe still would be good to potentially have...
+	-	
+	
+App	-	do all we can this Monday (30th)
+	-	Aligning microwave and app timers (Delay starting the app countdown for a little bit to allow start string to send and start)
+	-	In manual mode, is the adding 30 seconds fixed?
+	-	Remember device?
+	-	frozen vs not frozen
+	-	global boolean / test sending string simultaneously "is ready to start cooking"
