@@ -65,7 +65,6 @@ public class DisplaySearchResults extends Activity {
                     Bundle foodItemBundle = new Bundle();
                     foodItemBundle.putString("Food_Type", selectedFood.getFoodType());
                     foodItemBundle.putString("Brand_Name", selectedFood.getBrandName());
-                    foodItemBundle.putBoolean("Frozen", selectedFood.getFrozen());
                     foodItemBundle.putString("Instructions", selectedFood.getInstructions());
                     foodItemBundle.putByteArray("Image_Byte_Array", selectedFood.getImage());
 

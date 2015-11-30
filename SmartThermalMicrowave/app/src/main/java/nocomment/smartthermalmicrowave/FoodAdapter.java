@@ -69,8 +69,7 @@ public class FoodAdapter extends BaseAdapter {
             image.setImageBitmap(foodBitmap);
         }
 
-        String frozen = item.getFrozen() ? " (Frozen)" : " (Not Frozen)";
-        foodType.setText(item.getFoodType() + frozen);
+        foodType.setText(item.getFoodType());
         brandName.setText(item.getBrandName());
 
         return rowView;

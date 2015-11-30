@@ -38,8 +38,6 @@ public class InstructionsActivity extends Activity {
 
         String foodType = foodItemBundle.getString("Food_Type");
         String brandName = foodItemBundle.getString("Brand_Name");
-        boolean frozen = foodItemBundle.getBoolean("Frozen");
-        String frozenString = frozen ? " (Frozen)": " (Not Frozen)";
         byte[] imageArray = foodItemBundle.getByteArray("Image_Byte_Array");
 
         isMicrowavable = (!foodType.equals("Fork"));
@@ -48,7 +46,7 @@ public class InstructionsActivity extends Activity {
         setContentView(R.layout.activity_instructions);
 
         foodInfoView = (TextView) findViewById(R.id.text_view_food_info);
-        foodInfoView.setText(foodType + frozenString + "\n" + brandName);
+        foodInfoView.setText(foodType + "\n" + brandName);
 
         instructionView = (TextView) findViewById(R.id.text_view_instruction);
         instructionView.setText(LocalDatabase.parseInstructionString(codedInstructionString));

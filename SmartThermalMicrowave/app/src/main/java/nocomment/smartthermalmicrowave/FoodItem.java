@@ -6,7 +6,6 @@ package nocomment.smartthermalmicrowave;
 public class FoodItem{
     private String food_type;
     private String brand_name;
-    private boolean frozen;
     private long upc;
     private String instructions;
     private byte[] image;
@@ -16,11 +15,10 @@ public class FoodItem{
      *
      * @author James Watts
      */
-    public FoodItem(String food_type, String brand_name, boolean frozen, long upc, String instructions, byte[] image){
+    public FoodItem(String food_type, String brand_name, long upc, String instructions, byte[] image){
 
         this.food_type = food_type;
         this.brand_name = brand_name;
-        this.frozen = frozen;
         this.upc = upc;
         this.instructions = instructions;
         this.image = image;
@@ -38,13 +36,6 @@ public class FoodItem{
      */
     public String getBrandName(){
         return brand_name;
-    }
-
-    /**
-     * Getter method for the frozen field
-     */
-    public boolean getFrozen(){
-        return frozen;
     }
 
     /**
@@ -68,12 +59,6 @@ public class FoodItem{
     @Override
     public String toString()
     {
-        String frozenString;
-        if(frozen)
-            frozenString = "Frozen";
-        else
-            frozenString = "Not Frozen";
-
-        return "Food Type: " + food_type + " (" + frozenString + ")" + "\tBrand Name: " + brand_name ;
+        return "Food Type: " + food_type + "\tBrand Name: " + brand_name;
     }
 }

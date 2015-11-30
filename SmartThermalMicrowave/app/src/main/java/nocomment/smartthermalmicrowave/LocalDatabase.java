@@ -40,7 +40,6 @@ public class LocalDatabase {
                 // Create a new FoodItem with the following values:
                 String food_type = results.getString("FOOD_TYPE");
                 String brand_name = results.getString("BRAND_NAME");
-                boolean frozen = results.getBoolean("FROZEN");
                 long upc = results.getLong("UPC_BARCODE");
                 String instructions = results.getString("INSTRUCTIONS");
                 Blob imageBlob = results.getBlob("FOOD_IMAGE");
@@ -49,7 +48,7 @@ public class LocalDatabase {
                 if(imageBlob != null)
                     imageArray = imageBlob.getBytes(1, (int) imageBlob.length());
 
-                FoodItem newItem = new FoodItem(food_type, brand_name, frozen, upc, instructions, imageArray);
+                FoodItem newItem = new FoodItem(food_type, brand_name, upc, instructions, imageArray);
 
                 foodList.add(newItem);
             }
