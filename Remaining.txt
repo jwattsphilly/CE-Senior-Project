@@ -38,9 +38,6 @@ Demo Day	-
 	-	need to test how long the tablet will last
 	
 Physical Build	-	try to finish this all Monday
-	-	Mount the fans to the case
-		-	need drill and bits to do so
-		-	mount with velcro
 	-	need second tablet for seek	
 	-	covering front panel buttons
 	-	more adapter cables?
@@ -49,7 +46,3 @@ Web Site	-	make sure with Ken that this isn't needed
 	-	necessary?
 	-	maybe still would be good to potentially have...
 	-	
-	
-App	-	do all we can this Monday (30th)
-	-	Remember device?
-	-	global boolean / test sending string simultaneously "is ready to start cooking"
