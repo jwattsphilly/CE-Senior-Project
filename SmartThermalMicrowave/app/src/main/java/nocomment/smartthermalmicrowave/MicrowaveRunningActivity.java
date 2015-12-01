@@ -19,12 +19,16 @@ import java.util.ArrayList;
  */
 public class MicrowaveRunningActivity extends Activity {
 
+    private boolean readyToStart = false;
+    private static long waitTime = 500;
+
     private int secondsUntilFinished = 0;
     private int timeOfNextStir = 0;
     private int indexOfInstruction = 0;
     private boolean isRunning = false;
     private ArrayList<String> instructionList = new ArrayList<String>();
 
+    private CountDownTimer secretTimer = null;
     private CountDownTimer counter = null;
     private TextView counterText = null;
     private TextView stirText = null;
@@ -55,6 +59,7 @@ public class MicrowaveRunningActivity extends Activity {
 
         // Send the first part of the instruction to the Arduino
         UsbSingleton.sendDataUSB(instructionList.get(indexOfInstruction));
+        startSecretTimer(waitTime * (instructionList.get(indexOfInstruction).length()));
     }
 
     private void startCounter(final int timeLeft)
@@ -78,6 +83,7 @@ public class MicrowaveRunningActivity extends Activity {
                     isRunning = false;
                     // Send instruction portion
                     UsbSingleton.sendDataUSB(instructionList.get(indexOfInstruction));
+                    startSecretTimer(waitTime * (instructionList.get(indexOfInstruction).length()));
                 }
             }
 
@@ -94,6 +100,24 @@ public class MicrowaveRunningActivity extends Activity {
         counter.start();
     }
 
+    private void startSecretTimer(long millis)
+    {
+        readyToStart = false;
+
+        secretTimer = new CountDownTimer(millis, millis/2) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {}
+
+            @Override
+            public void onFinish() {
+                readyToStart = true;
+            }
+        };
+
+        secretTimer.start();
+    }
+
     private int getTimeOfNextStir(ArrayList<String> instructionList, int currentInstructionIndex)
     {
         int time = 0;
@@ -108,30 +132,36 @@ public class MicrowaveRunningActivity extends Activity {
 
     public void startStopOnClick(View v)
     {
-        if (isRunning)               // Stop timer
-        {
-            // Send the "S" (Pause) instruction to the Arduino
-            UsbSingleton.sendDataUSB("S");
-            // Stop our timer
-            counter.cancel();
-            stirText.setText(" ");
-            stopStartButton.setText("Start");
-            isRunning = false;
-        } else                        // Start timer
-        {
-            // Send "s" (start) instruction to the Arduino
-            UsbSingleton.sendDataUSB("s");
-            // Start our counter
-            startCounter(secondsUntilFinished);
+        if(readyToStart) {
+            if (isRunning)               // Stop timer
+            {
+                // Send the "S" (Pause) instruction to the Arduino
+                UsbSingleton.sendDataUSB("S");
+                startSecretTimer(waitTime);
 
-            stirText.setText(" ");
-            stopStartButton.setText("Stop");
-            isRunning = true;
+                // Stop our timer
+                counter.cancel();
+                stirText.setText(" ");
+                stopStartButton.setText("Start");
+                isRunning = false;
+            } else                        // Start timer
+            {
+                // Send "s" (start) instruction to the Arduino
+                UsbSingleton.sendDataUSB("s");
+                startSecretTimer(waitTime);
+
+                // Start our counter
+                startCounter(secondsUntilFinished);
+                stirText.setText(" ");
+                stopStartButton.setText("Stop");
+                isRunning = true;
+            }
         }
     }
 
     public void togglePlate(View v)
     {
         UsbSingleton.sendDataUSB("m");  // Toggle the plate motor
+        startSecretTimer(waitTime);
     }
 }
