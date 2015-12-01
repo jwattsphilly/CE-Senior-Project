@@ -23,6 +23,7 @@ public class ManualMicrowaveControl extends Activity
     private TextView timerText;
     private CountDownTimer timer = null;
     private int secondsUntilFinished = 0;
+    private long millisecondsUntilFinished = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class ManualMicrowaveControl extends Activity
                     {
                         if (timerString != "") {
                             timerString += '0';             // Append the timer string
-                            timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                            timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                             UsbSingleton.sendDataUSB("b0"); // Send message to microwave
                         }
                         break;
@@ -76,14 +77,14 @@ public class ManualMicrowaveControl extends Activity
                     {
                         timerString = "100";                // Timer string now 1 minute
                         UsbSingleton.sendDataUSB("b1");     // Send message to microwave
-                        startTimer(60);                     // Start the timer for 1 minute
+                        startTimer(60000);                  // Start the timer for 1 minute
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
                     case TIME_COOK: // Append a 1 on the timer
                     {
                         timerString += '1';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b1");     // Send message to microwave
                         break;
                     }
@@ -106,14 +107,14 @@ public class ManualMicrowaveControl extends Activity
                     {
                         timerString = "200";                // Timer string now 2 minutes
                         UsbSingleton.sendDataUSB("b2");     // Send message to microwave
-                        startTimer(120);                    // Start the timer for 2 minutes
+                        startTimer(120000);                 // Start the timer for 2 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
                     case TIME_COOK: // Append a 2 on the timer
                     {
                         timerString += '2';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b2");     // Send message to microwave
                         break;
                     }
@@ -136,14 +137,14 @@ public class ManualMicrowaveControl extends Activity
                     {
                         timerString = "300";                // Timer string now 3 minutes
                         UsbSingleton.sendDataUSB("b3");     // Send message to microwave
-                        startTimer(180);                    // Start the timer for 3 minutes
+                        startTimer(180000);                 // Start the timer for 3 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
                     case TIME_COOK: // Append a 3 on the timer
                     {
                         timerString += '3';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b3");     // Send message to microwave
                         break;
                     }
@@ -166,14 +167,14 @@ public class ManualMicrowaveControl extends Activity
                     {
                         timerString = "400";                // Timer string now 4 minutes
                         UsbSingleton.sendDataUSB("b4");     // Send message to microwave
-                        startTimer(240);                    // Start the timer for 4 minutes
+                        startTimer(240000);                 // Start the timer for 4 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
                     case TIME_COOK: // Append a 4 on the timer
                     {
                         timerString += '4';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b4");     // Send message to microwave
                         break;
                     }
@@ -196,14 +197,14 @@ public class ManualMicrowaveControl extends Activity
                     {
                         timerString = "500";                // Timer string now 5 minutes
                         UsbSingleton.sendDataUSB("b5");     // Send message to microwave
-                        startTimer(300);                    // Start the timer for 5 minutes
+                        startTimer(300000);                 // Start the timer for 5 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
                     case TIME_COOK: // Append a 5 on the timer
                     {
                         timerString += '5';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b5");     // Send message to microwave
                         break;
                     }
@@ -226,14 +227,14 @@ public class ManualMicrowaveControl extends Activity
                     {
                         timerString = "600";                // Timer string now 6 minutes
                         UsbSingleton.sendDataUSB("b6");     // Send message to microwave
-                        startTimer(360);                    // Start the timer for 6 minutes
+                        startTimer(360000);                 // Start the timer for 6 minutes
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
                     case TIME_COOK: // Append a 6 on the timer
                     {
                         timerString += '6';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b6");     // Send message to microwave
                         break;
                     }
@@ -255,7 +256,7 @@ public class ManualMicrowaveControl extends Activity
                     case TIME_COOK: // Append a 7 on the timer
                     {
                         timerString += '7';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b7");     // Send message to microwave
                         break;
                     }
@@ -278,7 +279,7 @@ public class ManualMicrowaveControl extends Activity
                     case TIME_COOK: // Append an 8 on the timer
                     {
                         timerString += '8';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b8");     // Send message to microwave
                         break;
                     }
@@ -301,7 +302,7 @@ public class ManualMicrowaveControl extends Activity
                     case TIME_COOK: // Append a 9 on the timer
                     {
                         timerString += '9';                 // Append the timer string
-                        timerText.setText(convertToMinutesAndSeconds(timerString));// Update TextView
+                        timerText.setText(convertTimerStringToMinutesAndSeconds());// Update TextView
                         UsbSingleton.sendDataUSB("b9");     // Send message to microwave
                         break;
                     }
@@ -325,7 +326,7 @@ public class ManualMicrowaveControl extends Activity
                     {
                         timerString = "30";
                         UsbSingleton.sendDataUSB("s");      // Send message to microwave
-                        startTimer(30);                     // Start the timer for 30 seconds
+                        startTimer(30000);                  // Start the timer for 30 seconds
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -335,7 +336,7 @@ public class ManualMicrowaveControl extends Activity
                         if(!timerString.isEmpty())
                         {
                             UsbSingleton.sendDataUSB("s");      // Send message to microwave
-                            startTimer(convertToSeconds(convertToMinutesAndSeconds(timerString)));  // Start the timer using timerString
+                            startTimer(1000*convertToSeconds(convertTimerStringToMinutesAndSeconds()));  // Start the timer using timerString
                             mode = MicrowaveMode.RUNNING;
                         }
                         break;
@@ -344,14 +345,14 @@ public class ManualMicrowaveControl extends Activity
                     {
                         UsbSingleton.sendDataUSB("s");      // Send message to microwave
                         timer.cancel();
-                        secondsUntilFinished+=30;           // Add 30 seconds to the timer
-                        startTimer(secondsUntilFinished);
+                        millisecondsUntilFinished+=30000;
+                        startTimer(millisecondsUntilFinished);
                         break;
                     }
                     case PAUSED:
                     {
                         UsbSingleton.sendDataUSB("s");      // Send message to microwave
-                        startTimer(secondsUntilFinished);
+                        startTimer(millisecondsUntilFinished);
                         mode = MicrowaveMode.RUNNING;
                         break;
                     }
@@ -428,21 +429,27 @@ public class ManualMicrowaveControl extends Activity
         }
     }
 
-    private void startTimer(final int timeLeft)
+    private void startTimer(final long timeLeftMilliseconds)
     {
-        secondsUntilFinished = timeLeft;
-        timer = new CountDownTimer(timeLeft * 1000, 1000) {
+        secondsUntilFinished = (int) timeLeftMilliseconds/1000;
+        timer = new CountDownTimer(timeLeftMilliseconds, 1) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                secondsUntilFinished = (int) (millisUntilFinished / 1000);
-                timerText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
+
+                if(millisUntilFinished < timeLeftMilliseconds)
+                {
+                    secondsUntilFinished = (int) Math.ceil(millisUntilFinished / 1000.0);
+                    millisecondsUntilFinished = millisUntilFinished;
+                    timerText.setText(LocalDatabase.secondsToString(secondsUntilFinished));
+                }
             }
 
             @Override
             public void onFinish() {
                 secondsUntilFinished = 0;
                 timerText.setText("Enjoy!");
+                UsbSingleton.sendDataUSB("S");
                 mode = MicrowaveMode.EXPRESS;
                 // YAY!  We finished!
             }
@@ -461,25 +468,33 @@ public class ManualMicrowaveControl extends Activity
         return seconds;
     }
 
-    private String convertToMinutesAndSeconds(String tString)
+    private String convertTimerStringToMinutesAndSeconds()
     {
-        if(tString.isEmpty())
+        if(timerString.isEmpty())
             return "00:00";
 
-        if(tString.length() == 1)
-            return "00:0"+tString;
+        if(timerString.length() == 1)
+            return "00:0"+timerString;
 
         // Get the last two digits and convert them to minutes and seconds (in case someone tried to put in 90 seconds instead of 1:30)
-        int index = tString.length()-2;
-        int lastTwoDigits = Integer.parseInt(tString.substring(index));
+        int index = timerString.length()-2;
+        int lastTwoDigits = Integer.parseInt(timerString.substring(index));
 
         int minutes = lastTwoDigits / 60;
         int seconds = lastTwoDigits % 60;
 
         // Get the first digits and add them to minutes
-        if(tString.length() > 2)
+        if(timerString.length() > 2)
         {
-            minutes += Integer.parseInt(tString.substring(0, index));
+            if(timerString.length() > 4)
+            {
+                // Get rid of all starting digits until there are only four digits left
+                index-=(timerString.length() - 4);
+                int idx = timerString.length()-4;
+                timerString = timerString.substring(idx);
+            }
+
+            minutes += Integer.parseInt(timerString.substring(0, index));
         }
 
         String minutesString = (minutes > 9) ? ""+minutes : "0"+minutes;

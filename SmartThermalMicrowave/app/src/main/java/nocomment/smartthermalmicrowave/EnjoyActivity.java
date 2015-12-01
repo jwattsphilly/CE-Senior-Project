@@ -40,7 +40,7 @@ public class EnjoyActivity extends Activity{
 
         if(isMicrowavable) {
             if (!counterIsRunning) {
-                CountDownTimer counter = new CountDownTimer(30000, 1000) {
+                CountDownTimer counter = new CountDownTimer(30500, 1000) {
 
                     @Override
                     public void onTick(long millisUntilFinished) {

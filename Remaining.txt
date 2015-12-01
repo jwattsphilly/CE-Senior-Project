@@ -43,8 +43,6 @@ Physical Build	-	try to finish this all Monday
 		-	mount with velcro
 	-	need second tablet for seek	
 	-	covering front panel buttons
-	-	power strip
-	-	USB split for charging
 	-	more adapter cables?
 		
 Web Site	-	make sure with Ken that this isn't needed
@@ -53,8 +51,5 @@ Web Site	-	make sure with Ken that this isn't needed
 	-	
 	
 App	-	do all we can this Monday (30th)
-	-	Aligning microwave and app timers (Delay starting the app countdown for a little bit to allow start string to send and start)
-	-	In manual mode, is the adding 30 seconds fixed?
 	-	Remember device?
-	-	frozen vs not frozen
 	-	global boolean / test sending string simultaneously "is ready to start cooking"

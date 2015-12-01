@@ -18,7 +18,6 @@
 // */
 //public class DisplaySearchResultsUPC extends Activity {
 //
-//    // TODO: Get rid of this class entirely!
 //
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {

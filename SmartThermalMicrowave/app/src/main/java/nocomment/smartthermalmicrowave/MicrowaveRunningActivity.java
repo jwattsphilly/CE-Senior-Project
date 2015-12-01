@@ -59,7 +59,7 @@ public class MicrowaveRunningActivity extends Activity {
 
     private void startCounter(final int timeLeft)
     {
-        counter = new CountDownTimer(timeLeft * 1000, 1000) {
+        counter = new CountDownTimer(timeLeft * 1000 + 500, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
