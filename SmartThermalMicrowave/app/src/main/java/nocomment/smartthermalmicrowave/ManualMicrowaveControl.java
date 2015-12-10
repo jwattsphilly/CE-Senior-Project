@@ -1,12 +1,18 @@
 package nocomment.smartthermalmicrowave;
 
 import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 /**
  * Created by Darin on 10/13/15.
@@ -25,6 +31,10 @@ public class ManualMicrowaveControl extends Activity
     private int secondsUntilFinished = 0;
     private long millisecondsUntilFinished = 0;
 
+    private MediaPlayer mediaPlayer;
+    private AssetManager asset;
+    private AssetFileDescriptor fileDescriptor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +42,7 @@ public class ManualMicrowaveControl extends Activity
         timerString = "";
         powerLevel = 10;
         setContentView(R.layout.microwave_manual_control);
+        setupMediaPlayer();
     }
 
     public void pressButton(View view)
@@ -451,10 +462,24 @@ public class ManualMicrowaveControl extends Activity
                 timerText.setText("Enjoy!");
                 UsbSingleton.sendDataUSB("S");
                 mode = MicrowaveMode.EXPRESS;
+                mediaPlayer.start();
                 // YAY!  We finished!
             }
         };
         timer.start();
+    }
+
+    private void setupMediaPlayer() {
+        asset = this.getAssets();
+        mediaPlayer = new MediaPlayer();
+        try {
+            fileDescriptor = asset.openFd("game-sound-correct.wav");
+            mediaPlayer.setDataSource(fileDescriptor.getFileDescriptor(), fileDescriptor.getStartOffset(), fileDescriptor.getLength());
+            mediaPlayer.prepare();
+            mediaPlayer.setVolume(1, 1);
+        } catch (IOException e) {
+            Toast.makeText(this, "Preparation of Audio File Failed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private int convertToSeconds(String minutesAndSecondsString)

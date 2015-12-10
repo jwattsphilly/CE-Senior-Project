@@ -21,9 +21,9 @@ public class EnjoyActivity extends Activity{
     private TextView enjoyView = null;
     private boolean counterIsRunning = false;
     private boolean isMicrowavable = true;
-    MediaPlayer mediaPlayer;
-    AssetManager asset;
-    AssetFileDescriptor fileDescriptor;
+    private MediaPlayer mediaPlayer;
+    private AssetManager asset;
+    private AssetFileDescriptor fileDescriptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
