@@ -7,11 +7,11 @@ Microwave Button Hacking:		June 11th, 2015			Done
 Arduino Control of Microwave:		June 11th, 2015			Done
 Tablet Purchase:			June 18th, 2015			Done
 Thermal Camera Purchase:		June 28th, 2015			Done
-Microwave Platter Control:		December 1st, 2015				Done
-Thermal Camera Mounting:		November 30th, 2015				Done
-Functional Android App:			December 9th, 2015			Done
-Android App Interfacing w/ Arduino:	November 27th, 2015				Done
+Microwave Platter Control:		December 1st, 2015		Done
+Thermal Camera Mounting:		November 30th, 2015		Done
+Functional Android App:			December 9th, 2015		Done
+Android App Interfacing w/ Arduino:	November 27th, 2015		Done
 Android App Interfacing w/ Camera:	?				In Progress		Can use the tablet camera to read UPC codes. No thermal camera connection yet.
-User Testing and Feedback:		November 16th, 2015				Done
+User Testing and Feedback:		November 16th, 2015		Done
 Image Processing (Stretch Goal):	?				Not Started
-UPC Scanning (Stretch Goal):		October 28th, 2015				Done
+UPC Scanning (Stretch Goal):		October 28th, 2015		Done
