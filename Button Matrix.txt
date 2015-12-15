@@ -88,4 +88,10 @@ Power		A0		12
 Start/+30 sec.	A1		13
 Stop/Cancel	A2		14
 Motor		A3		15
+XBox Fan	A4		16
 
+LED COMPONENT:		ARDUINO PIN:
+5 Volt Power Source	A5
+Green Pin		0 (RX)
+Blue Pin		1 (TX)
+Red Pin			13
