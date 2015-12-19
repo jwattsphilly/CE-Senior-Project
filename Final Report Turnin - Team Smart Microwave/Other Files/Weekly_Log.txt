@@ -1,0 +1,49 @@
+﻿Stuart Johnsen, Darin Stoker, James Watts
+Computer Engineering Senior Project, Fall 2015
+Heat Map Technology for a Microwave Oven
+ 
+March 29th – April 4th: Parts research, potential sources found for each of our required parts and detailed in our updated project proposal report.
+ 
+April 5th – April 11th: Purchased microwave to begin testing with from Walmart for $60.
+ 
+April 12th – April 18th: Began microwave teardown, started reverse engineering the connection points, soldered in test leads for logic analysis.  Found that the microcontroller is a microwave specific one.  If we are able to figure out the logic, control of the microwave should be easily recreateable.
+ 
+April 19th – April 25th: Attempted to get information on another potential camera sensor from FLIR, quote was out of scope for the project.  Ordered parts for initial prototyping, still need to obtain a camera from Seek, which is taking longer than expected for an evaluation unit.
+ 
+April 26th – May 2nd: All parts are not currently in hand.  We were busy finishing other projects for other classes, but we feel like things are still progressing well.  We determined that microwave control is, at the moment, more important to focus on than getting parts ordered, as that will be less of a bottleneck than controlling the microwave
+ 
+May 3rd – May 9th: Did not meet this week due to finals week and other commitments.  Set our summer schedule to meet on Tuesday and Thursday evenings at a minimum to work on the project.
+ 
+(Note, up until this point, we specifically planned to work little on this project.  Now that school is out, we are able to focus more time on completing it.)
+
+May 24th – May 30th: We used an oscilloscope to analyze the signals to and from the button matrix and found out that the data was being sent serially.  We decided to use relays to control the buttons.  Fried a few wires on accident.  Lesson learned: do not store wires in microwave.  Oops.
+
+May 31st – June 6th: Mounted the Arduino and relay boards onto the inner wall of the outer microwave shell and connected the two boards.  Connected the relay board to the microcontroller.
+
+June 7th - June 13th: Finished initial modifications to the microwave, fixed connections between the micro controller and the relay board.  Created a serial connection interface to control the microwave via our serial protocol or via the front panel buttons.  Got word back from Seek that they couldn’t supply us with a demo unit, exploring finding a discounted option.  Chose our tablet, about to buy.
+
+June 14th - June 20th: Obtained a tablet that we will be interfacing with.  Downloaded the Android Studio software.
+
+June 21st - July 30th: Lots of work was done. Decided to control the existing geared motor in the microwave my connecting it to our relay board, allowing us to control the spin and to hold it in specific locations as dictated by the application and microcontroller.  Darin has completed the framework for the application controller and made it usable on the tablet we are interfacing with, as well as the skeleton for UPC interfacing.  James is fine-tuning the requirements and structure for our database, and we will likely go with an H2 based structure, barring any better alternatives appearing.  The seek thermal has proved to be a bit of a problem, as the SDK is not yet available when we were told it would be.  We are sourcing potential outside help to look at the protocols coming from the thermal in an effort to speed things up.  Stuart is working on updating documentation to match new and revised ideas / goals.
+
+July 31st - August 8th: Worked on documenting changes made to our design. Further refined the algorithms for controlling the microwave via the tablet and Arduino combination.  Worked on database structuring and our control sting structure.  We thought about how to possibly bypass the microcontroller again, but decided against it as it contains essential electronic support, like over-current protection.  We decided to get some better measurements though of amperage and voltage for our report, as it gives us a better idea of how to control the microcontroller better.  Found we may need a different tablet which will allow the use of both the Arduino and the Seek.
+
+August 23rd - August 29th: Started adding database connection code to our app.  We’ve run into a lot of problems with getting permissions set up and the connection string correct in order to connect to our database from a remote server.  We now have a Java class called FoodItem that holds all the information needed to search for a particular microwavable food in addition to that food’s cooking instructions.  We found some extra resources for USB communication and we’re still working on the driver.  Also contacted Seek and got added to the Alpha SDK list, so hopefully we’ll be getting an SDK Alpha in the near future.  This would negate the use of a custom USB driver.
+
+August 31st - September 5th: Made a very relieving breakthrough with the app/database connection.  We are finally able to connect to the food database remotely in our Java code.
+
+Sept 6th - 12th: Transferred the database to a new computer and made sure the connection still works. Works great! Got the tablet communicating with the database and displaying the information. Redesigned the UI so that searches by name and browsing are in the same activity. Looked into using android fragments, but will continue with android activities for now. Tested the microwave to verify all original buttons panel functionality. All is well. 
+
+Sept 13th - 19th: Went to the ABET meeting and then met with Ken. Mounted the microwave on a temporary particleboard platform. Reassembled the microwave and tested that it still works. Designed an activity hierarchy for the app. The app now searches by name and by manually entered UPC and the results display perfectly in the temporary text view. Started setting up UPC scanning and have partial success. We believe that we need to edit the AndroidManifest.xml and possibly create a separate activity. Verified that the local database functions work well.
+
+Sept 20th - 26th: Mounted the microwave on a permanent acrylic platform.  Rewired Arduino connections to the microwave and checked to make sure everything was still working.  Repaired errors in Arduino code.  Now all legal messages sent to Arduino are properly handled.  Wrote code for converting instruction strings into human readable text.  UPC scanning and database querying now fully functional.  Great week!  Yay! :) 
+
+Sept 27th - Oct 3rd: Got a hold of the code for an audio decoder to send messages from the tablet to the Arduino.  Edited the code through optimization and renaming horridly-named variables.  Ended up reprogramming the entire Android-to-Arduino interface so that it is actually an app instead of an applet.  Added the instruction parsing code to the application, though it’s not quite integrated yet.
+
+Oct 11th - 17th: Transferring data over the audio port has proven to be buggy and unreliable, but we did find a very promising method using the USB; so we started looking into that.  The app is coming along very well and all of the app’s Activities have been created and seem to be fully functional (apart from the communication with the Arduino).
+
+Oct 18th - 24th: Finished basic functionality of Android application including timers, activity flow, etc. Looked further into the USB communication and found it promising. Arduino code for the communication seeemed overly complicated (interrupts, etc), but upon testing we discovered it is required. Integrated USB communication Arduino code with our microwave control Arduino code. Using the given library necessitated getting rid of all standard Arduino serial communication. It works well! Used a tester app on the tablet to send characters and strings and they functioned! Integrated changes into Android app and tested. Success! There are small timing issues, but we have already come up with a possible solution for resolving them. 
+
+Oct 24th - 31st: Met with Ken about where we were with our project, set up a code / design review in two weeks.  Added motor control to our application.  Verified that our implementation would be safe for motor startup and control, spliced in wires from the motor into the relay board.  Added functionality to the Android and Arduino code to control the motor appropriately, allowing us to stop the motor at any time during cooking.  Started planning our code review.
+
+Nov 8th - 14th: This was a busy week! We did all the visual styling on the app, including the list view that was giving us so many problems. Stuart went out with the microwave setup and a box of mini quiches and got a bunch of feedback from other students. Overall, they had great things to say! We will put the results in the slides and final paper and will also take them into account for the final iteration of the software. We were having periodic USB connection loss, but that seems to have been resolved by adding "synchronous" to the USB send method definition. We think we were getting partial messages before that. We also decreased the buzzer sound so that we can use a custom sound from the tablet if we would like to.  
